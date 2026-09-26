@@ -1,0 +1,1059 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Красивая Грядка Опт</title>
+<meta name="description" content="Демо B2B-портала оптовых продаж: каталог, личный кабинет, накопительные скидки, импорт прайса, админка.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{
+  --bg:#F2F4EE;--surface:#FFFFFF;--surface2:#E9EDE3;--ink:#18211A;--muted:#5A675C;--line:#D5DCCF;
+  --primary:#2E5B3B;--primary-hover:#244A30;--primary-ink:#FFFFFF;--primary-soft:#DDE8DA;
+  --accent:#A8660F;--accent-soft:#F5E6CB;
+  --good:#2F7A45;--good-soft:#DCEEDF;--warn:#8F620A;--warn-soft:#F6EACB;--bad:#B3372B;--bad-soft:#F6DEDA;--info:#2F5E8A;--info-soft:#DCE7F2;
+  --leaf:#3F7A4C;--leaf2:#6FA05A;--bloom:#C9577A;--soil:#7A5A3C;--pot:#B9A58A;
+  --shadow:0 1px 2px rgba(24,33,26,.06),0 8px 24px rgba(24,33,26,.08);
+  --f-body:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-disp:"Unbounded","Onest",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
+  --bg:#0F1411;--surface:#161D18;--surface2:#1E2720;--ink:#E3E9E1;--muted:#9AA79C;--line:#2B362E;
+  --primary:#86BD93;--primary-hover:#9DCCA8;--primary-ink:#0D1A11;--primary-soft:#22362A;
+  --accent:#E3A64B;--accent-soft:#3A2D16;
+  --good:#72C488;--good-soft:#1C3324;--warn:#E4B456;--warn-soft:#3A2F16;--bad:#F08276;--bad-soft:#3D1F1B;--info:#86B6E2;--info-soft:#1B2B3B;
+  --leaf:#6FAE7B;--leaf2:#9CC77F;--bloom:#E487A4;--soil:#A88463;--pot:#6E6453;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);}}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#0F1411;--surface:#161D18;--surface2:#1E2720;--ink:#E3E9E1;--muted:#9AA79C;--line:#2B362E;
+  --primary:#86BD93;--primary-hover:#9DCCA8;--primary-ink:#0D1A11;--primary-soft:#22362A;
+  --accent:#E3A64B;--accent-soft:#3A2D16;
+  --good:#72C488;--good-soft:#1C3324;--warn:#E4B456;--warn-soft:#3A2F16;--bad:#F08276;--bad-soft:#3D1F1B;--info:#86B6E2;--info-soft:#1B2B3B;
+  --leaf:#6FAE7B;--leaf2:#9CC77F;--bloom:#E487A4;--soil:#A88463;--pot:#6E6453;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font:15px/1.5 var(--f-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--f-disp);font-weight:500;letter-spacing:-.01em;text-wrap:balance;margin:0}
+h1{font-size:1.45rem;line-height:1.25}
+h2{font-size:1.08rem;line-height:1.3}
+h3{font-size:.95rem;font-family:var(--f-body);font-weight:600;letter-spacing:0}
+p{margin:0}
+a{color:var(--primary)}
+.mono{font-family:var(--f-mono);font-size:.86em}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.small{font-size:.84rem}
+.eyebrow{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Demo strip + top bar */
+.demo-strip{background:var(--accent-soft);color:var(--ink);font-size:.8rem;padding:6px 16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.demo-strip b{color:var(--accent)}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line);padding-inline:16px}
+.topbar-in{max-width:1320px;margin:0 auto;display:flex;align-items:center;gap:16px;min-height:60px;flex-wrap:wrap;padding-block:8px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);cursor:pointer;background:none;border:0;padding:0}
+.brand-mark{width:34px;height:34px;border-radius:8px;background:var(--primary);display:grid;place-items:center}
+.brand-name{font-family:var(--f-disp);font-weight:600;font-size:.95rem;line-height:1.1;text-align:left}
+.brand-name small{display:block;font-family:var(--f-body);font-weight:500;font-size:.72rem;color:var(--muted);letter-spacing:.04em}
+.top-search{flex:1 1 260px;max-width:460px;position:relative}
+.top-search input{width:100%;padding:9px 12px 9px 36px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.top-search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.top-right{display:flex;align-items:center;gap:10px;margin-left:auto;flex-wrap:wrap}
+.seg{display:inline-flex;background:var(--surface2);border-radius:8px;padding:3px;gap:2px}
+.seg button{border:0;background:transparent;padding:5px 10px;border-radius:6px;font-size:.82rem;cursor:pointer;color:var(--muted);font-weight:500;white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.cart-btn{position:relative;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);padding:7px 12px;border-radius:8px;cursor:pointer;font-weight:500}
+.cart-btn .badge{background:var(--accent);color:#fff;border-radius:99px;font-size:.72rem;padding:0 7px;line-height:18px;font-weight:600}
+
+/* Layout */
+.shell{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:232px minmax(0,1fr);gap:24px;padding-inline:16px;padding-block:20px 60px}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px);align-self:start;display:flex;flex-direction:column;gap:18px}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav .eyebrow{padding:0 10px 6px}
+.nav button{display:flex;align-items:center;gap:10px;text-align:left;border:0;background:transparent;padding:8px 10px;border-radius:8px;cursor:pointer;color:var(--ink);font-weight:500;font-size:.92rem}
+.nav button:hover{background:var(--surface2)}
+.nav button[aria-current="page"]{background:var(--primary-soft);color:var(--primary);font-weight:600}
+.nav .cnt{margin-left:auto;font-size:.72rem;background:var(--accent);color:#fff;border-radius:99px;padding:0 7px;line-height:18px}
+.side-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:6px;font-size:.85rem}
+main{min-width:0;display:flex;flex-direction:column;gap:20px}
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.page-head .sub{color:var(--muted);margin-top:4px;font-size:.92rem}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.stack{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+/* Buttons & inputs */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--surface);padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:500;font-size:.9rem;white-space:nowrap;text-decoration:none;color:var(--ink)}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:var(--primary-ink)}
+.btn.primary:hover{background:var(--primary-hover)}
+.btn.accent{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--primary)}
+.btn.ghost:hover{background:var(--primary-soft)}
+.btn.sm{padding:5px 10px;font-size:.82rem}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.field{display:flex;flex-direction:column;gap:5px;font-size:.85rem}
+.field label{font-weight:500;color:var(--muted)}
+.input,select.input,textarea.input{padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:var(--surface);width:100%}
+textarea.input{min-height:110px;font-family:var(--f-mono);font-size:.85rem}
+.input:focus{border-color:var(--primary);outline:none;box-shadow:0 0 0 3px var(--primary-soft)}
+.check{display:flex;gap:8px;align-items:center;font-size:.9rem;cursor:pointer}
+.check input{accent-color:var(--primary);width:16px;height:16px}
+
+/* Pills */
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:.76rem;font-weight:600;padding:2px 9px;border-radius:99px;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.info{background:var(--info-soft);color:var(--info)}
+.pill.neutral{background:var(--surface2);color:var(--muted)}
+.tag{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;font-size:.84rem;cursor:pointer;font-weight:500}
+.tag[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:var(--primary-ink)}
+.tag .x{opacity:.7}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;text-align:left;padding:10px 12px;background:var(--surface2);white-space:nowrap}
+td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:middle}
+td.r,th.r{text-align:right}
+tr.click{cursor:pointer}
+tr.click:hover td{background:var(--surface2)}
+td .input{padding:5px 8px;min-width:80px}
+
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:4px}
+.kpi .v{font-family:var(--f-disp);font-size:1.35rem;font-weight:500;font-variant-numeric:tabular-nums;line-height:1.2}
+.kpi .d{font-size:.82rem;color:var(--muted)}
+
+/* Discount hero */
+.level{background:var(--primary);color:var(--primary-ink);border-radius:14px;padding:22px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:26px;align-items:center}
+.level .big{font-family:var(--f-disp);font-size:3.6rem;line-height:1;font-weight:600;font-variant-numeric:tabular-nums}
+.level .big small{font-size:1.4rem}
+.level .lbl{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;opacity:.8;font-weight:600}
+.ladder{display:flex;flex-direction:column;gap:10px}
+.ladder-track{position:relative;height:12px;border-radius:99px;background:rgba(255,255,255,.2)}
+:root[data-theme="dark"] .ladder-track{background:rgba(0,0,0,.2)}
+.ladder-fill{position:absolute;inset:0 auto 0 0;border-radius:99px;background:var(--accent)}
+.ladder-ticks{position:relative;height:34px;font-size:.76rem}
+.ladder-ticks span{position:absolute;transform:translateX(-50%);text-align:center;white-space:nowrap;line-height:1.25}
+.ladder-ticks span b{display:block;font-size:.85rem}
+.ladder-ticks span.first{transform:none}
+.ladder-ticks span.last{transform:translateX(-100%);text-align:right}
+.level-note{font-size:.9rem}
+.level-note b{font-weight:700}
+
+/* Catalog */
+.filters{display:flex;flex-direction:column;gap:12px}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
+.card:hover{box-shadow:var(--shadow)}
+.thumb{background:var(--surface2);aspect-ratio:4/3;display:grid;place-items:center;cursor:pointer;border:0;padding:0;width:100%;max-width:100%}
+.thumb svg{width:62%;height:auto}
+.card-body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card-name{font-weight:600;line-height:1.3;cursor:pointer;background:none;border:0;padding:0;text-align:left}
+.card-name:hover{color:var(--primary)}
+.chars{font-size:.8rem;color:var(--muted)}
+.price-row{display:flex;align-items:baseline;gap:8px;margin-top:auto;padding-top:6px;flex-wrap:wrap}
+.price{font-family:var(--f-disp);font-weight:500;font-size:1.1rem;font-variant-numeric:tabular-nums}
+.old{color:var(--muted);text-decoration:line-through;font-size:.84rem;font-variant-numeric:tabular-nums}
+.buy{display:flex;gap:8px;align-items:center}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.qty button{border:0;background:var(--surface2);width:30px;height:34px;cursor:pointer;font-size:1rem}
+.qty input{width:52px;border:0;text-align:center;height:34px;background:var(--surface);font-variant-numeric:tabular-nums}
+.buy .btn{flex:1}
+
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(10,16,12,.55);z-index:50;display:grid;place-items:center;padding:16px}
+.modal-box{background:var(--surface);border-radius:14px;max-width:880px;width:100%;max-height:calc(100% - 20px);overflow:auto;box-shadow:var(--shadow)}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface);z-index:1}
+.modal-body{padding:20px}
+.x-btn{border:0;background:var(--surface2);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:1.1rem}
+.pd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.gal-main{background:var(--surface2);border-radius:var(--r);aspect-ratio:1;display:grid;place-items:center;max-width:100%}
+.gal-main svg{width:64%}
+.gal-th{display:flex;gap:8px;margin-top:8px}
+.gal-th button{flex:1;aspect-ratio:1;background:var(--surface2);border:2px solid transparent;border-radius:8px;cursor:pointer;display:grid;place-items:center;padding:4px}
+.gal-th button[aria-pressed="true"]{border-color:var(--primary)}
+.gal-th svg{width:70%}
+dl.spec{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:.9rem}
+dl.spec dt{color:var(--muted)}
+dl.spec dd{margin:0;font-weight:500}
+
+/* Documents */
+.doc{background:#fff;color:#1a1a1a;border:1px solid #d8d8d8;padding:28px;font-size:.84rem;font-family:var(--f-body)}
+.doc h2{font-family:var(--f-body);font-weight:700;font-size:1.1rem;margin:14px 0}
+.doc table th{background:#f0f0f0;color:#333}
+.doc td,.doc th{border:1px solid #bbb;padding:5px 8px}
+.doc .req{display:grid;grid-template-columns:140px 1fr;gap:2px 10px}
+
+/* Charts */
+.hbar{display:grid;grid-template-columns:minmax(110px,170px) minmax(0,1fr) auto;gap:10px;align-items:center;font-size:.88rem}
+.hbar .trk{height:16px;position:relative}
+.hbar .fill{position:absolute;inset:0 auto 0 0;background:var(--primary);border-radius:0 4px 4px 0}
+.hbar .val{font-variant-numeric:tabular-nums;font-weight:500;text-align:right;min-width:90px}
+.chart svg{width:100%;height:auto;display:block}
+.chart text{fill:var(--muted);font-size:13px;font-family:var(--f-body)}
+.chart .gl{stroke:var(--line);stroke-width:1}
+.chart .bar{fill:var(--primary)}
+.chart .bar.dim{fill:var(--primary);opacity:.45}
+.chart .hit{fill:transparent;cursor:default}
+.chart .hit:hover + .bar, .chart g:hover .bar{opacity:1;fill:var(--accent)}
+.tip{position:fixed;z-index:60;background:var(--ink);color:var(--bg);font-size:.8rem;padding:6px 9px;border-radius:6px;pointer-events:none;white-space:nowrap;box-shadow:var(--shadow)}
+
+/* Import */
+.drop{border:2px dashed var(--line);border-radius:var(--r);padding:22px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center;background:var(--bg)}
+.drop.over{border-color:var(--primary);background:var(--primary-soft)}
+.sumrow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.sum{border-radius:8px;padding:10px 12px;background:var(--surface2)}
+.sum .v{font-family:var(--f-disp);font-size:1.2rem;font-variant-numeric:tabular-nums}
+.sum.good{background:var(--good-soft)} .sum.bad{background:var(--bad-soft)} .sum.warn{background:var(--warn-soft)} .sum.info{background:var(--info-soft)}
+.opt-group{display:flex;gap:8px;flex-wrap:wrap}
+.radio{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;font-size:.88rem;background:var(--surface)}
+.radio:has(input:checked){border-color:var(--primary);background:var(--primary-soft);color:var(--primary);font-weight:600}
+.radio input{accent-color:var(--primary)}
+
+/* Integrations */
+.integ{display:flex;flex-direction:column;gap:10px}
+.integ-top{display:flex;align-items:center;gap:12px}
+.integ-ic{width:40px;height:40px;border-radius:8px;background:var(--surface2);display:grid;place-items:center;font-family:var(--f-disp);font-weight:600;font-size:.8rem;color:var(--primary)}
+.feed{display:flex;flex-direction:column}
+.feed div{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:.85rem}
+.feed div:first-child{border-top:0}
+.feed time{color:var(--muted);font-variant-numeric:tabular-nums;font-size:.8rem}
+
+.note{background:var(--info-soft);color:var(--ink);border-radius:8px;padding:10px 12px;font-size:.86rem}
+.note.warn{background:var(--warn-soft)}
+.note.bad{background:var(--bad-soft)}
+.note.good{background:var(--good-soft)}
+.empty{padding:36px;text-align:center;color:var(--muted)}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;z-index:70;font-size:.9rem;box-shadow:var(--shadow);max-width:calc(100% - 32px)}
+.login{max-width:420px;margin:30px auto;width:100%}
+.hr{height:1px;background:var(--line)}
+
+@media (max-width:1000px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:1fr 1fr}.sumrow{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr;gap:14px}
+  .side{position:static}
+  .nav{flex-direction:row;overflow-x:auto;gap:4px;padding-bottom:4px}
+  .nav .eyebrow{display:none}
+  .nav button{white-space:nowrap;flex:none}
+  .side-card{display:none}
+  .grid2,.pd{grid-template-columns:1fr}
+  .level{grid-template-columns:1fr;gap:14px}
+}
+@media (max-width:520px){
+  .kpis,.grid3{grid-template-columns:1fr 1fr;gap:10px}
+  .sumrow{grid-template-columns:1fr 1fr}
+  .level .big{font-size:2.8rem}
+  .hbar{grid-template-columns:1fr auto}.hbar .trk{grid-column:1 / -1;order:3}
+  .top-search{order:5;flex-basis:100%;max-width:none}
+  .brand-name small{display:none}
+}
+@media (prefers-reduced-motion:no-preference){.btn,.tag,.nav button{transition:background .15s,border-color .15s,color .15s}.ladder-fill{transition:width .6s ease}}
+</style>
+
+<div class="demo-strip"><span><b>Демо-версия.</b> Все данные тестовые. Обмен с 1С, проверка ИНН, почта и Telegram имитируются.</span><span class="row" style="gap:8px"><button class="btn sm ghost" data-act="reset">Сбросить демо-данные</button></span></div>
+<header class="topbar"><div class="topbar-in">
+  <button class="brand" data-act="home" aria-label="На главную">
+    <span class="brand-mark"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V11" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M12 12C12 7 8 4 4 4c0 5 3 8 8 8Z" fill="#fff"/><path d="M12 14c0-4 3-7 8-7 0 4-3 7-8 7Z" fill="#fff" opacity=".7"/><path d="M5 21h14" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>
+    <span class="brand-name">Красивая Грядка<small>ОПТОВЫЙ ПОРТАЛ</small></span>
+  </button>
+  <div class="top-search" id="topSearch"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Артикул или название, например KG-CN-001" aria-label="Поиск по каталогу"></div>
+  <div class="top-right">
+    <div class="seg" role="group" aria-label="Режим просмотра">
+      <button data-act="role" data-role="guest">Гость</button>
+      <button data-act="role" data-role="client">Клиент</button>
+      <button data-act="role" data-role="admin">Сотрудник</button>
+    </div>
+    <button class="cart-btn" id="cartBtn" data-act="go" data-view="cart"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.5L21 8H6.2"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg><span id="cartSum" class="num">0 ₽</span><span class="badge" id="cartCnt">0</span></button>
+  </div>
+</div></header>
+<div class="shell">
+  <aside class="side" id="side"></aside>
+  <main id="main"></main>
+</div>
+<div class="modal" id="modal" hidden><div class="modal-box" role="dialog" aria-modal="true" id="modalBox"></div></div>
+<div class="tip" id="tip" hidden></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ============ helpers ============ */
+const $=s=>document.querySelector(s);
+const NF=new Intl.NumberFormat('ru-RU');
+const fmt=n=>NF.format(Math.round(n));
+const rub=n=>fmt(n)+' ₽';
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const NOW=new Date();
+const DAY=864e5;
+const dstr=d=>new Date(d).toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'});
+const tstr=d=>new Date(d).toLocaleString('ru-RU',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+const MONTHS=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function plural(n,a,b,c){n=Math.abs(n)%100;const n1=n%10;if(n>10&&n<20)return c;if(n1>1&&n1<5)return b;if(n1==1)return a;return c}
+
+/* INN */
+function innOk(v){
+  if(!/^\d{10}$|^\d{12}$/.test(v))return false;
+  const d=v.split('').map(Number);
+  const k=(c,n)=>c.slice(0,n).reduce((s,x,i)=>s+x*d[i],0)%11%10;
+  if(d.length===10)return k([2,4,10,3,5,9,4,6,8],9)===d[9];
+  return k([7,2,4,10,3,5,9,4,6,8],10)===d[10]&&k([3,7,2,4,10,3,5,9,4,6,8],11)===d[11];
+}
+function makeInn10(base){const d=base.split('').map(Number);const c=[2,4,10,3,5,9,4,6,8].reduce((s,x,i)=>s+x*d[i],0)%11%10;return base+c}
+
+/* ============ reference data ============ */
+const CATS=['Хвойные','Лиственные кустарники','Многолетники','Розы','Луковичные','Рассада','Грунты и удобрения','Кашпо и инвентарь'];
+const SHAPE={'Хвойные':'conifer','Лиственные кустарники':'shrub','Многолетники':'perennial','Розы':'rose','Луковичные':'bulb','Рассада':'seedling','Грунты и удобрения':'bag','Кашпо и инвентарь':'pot'};
+const MANAGERS=[
+  {id:'M-01',name:'Ирина Соколова',phone:'+7 (4872) 55-10-21',email:'sokolova@[домен]',tg:'@sokolova_kg'},
+  {id:'M-02',name:'Алексей Петров',phone:'+7 (4872) 55-10-22',email:'petrov@[домен]',tg:'@petrov_kg'},
+  {id:'M-03',name:'Мария Власова',phone:'+7 (4872) 55-10-23',email:'vlasova@[домен]',tg:'@vlasova_kg'}
+];
+const mgr=id=>MANAGERS.find(m=>m.id===id)||MANAGERS[0];
+// art, name, cat, brand, price, stock, unit, seasonal, height, age, container, lead(days)
+const BASE=[
+['KG-CN-001','Туя западная «Смарагд»',0,'Северный питомник',1450,320,'шт',0,'80–100 см','4 года','C7.5',2],
+['KG-CN-002','Туя западная «Брабант»',0,'Северный питомник',1250,410,'шт',0,'60–80 см','3 года','C5',2],
+['KG-CN-003','Можжевельник казацкий',0,'Северный питомник',890,260,'шт',0,'30–40 см','3 года','C3',3],
+['KG-CN-004','Ель колючая «Глаука Глобоза»',0,'Greenline NL',4900,45,'шт',0,'60–80 см','7 лет','C15',7],
+['KG-CN-005','Сосна горная «Пумилио»',0,'Greenline NL',2300,88,'шт',0,'40–50 см','5 лет','C10',5],
+['KG-CN-006','Можжевельник горизонтальный «Блю Чип»',0,'Северный питомник',760,0,'шт',0,'20–30 см','3 года','C3',14],
+['KG-SH-001','Гортензия метельчатая «Лаймлайт»',1,'Greenline NL',1180,230,'шт',0,'60–80 см','3 года','C5',3],
+['KG-SH-002','Гортензия метельчатая «Ванилла Фрайз»',1,'Greenline NL',1240,150,'шт',0,'60–80 см','3 года','C5',3],
+['KG-SH-003','Спирея японская «Голдфлейм»',1,'Северный питомник',540,380,'шт',0,'30–40 см','2 года','C3',2],
+['KG-SH-004','Барбарис Тунберга «Атропурпуреа»',1,'Северный питомник',620,210,'шт',0,'40–50 см','3 года','C3',2],
+['KG-SH-005','Сирень обыкновенная «Красавица Москвы»',1,'Северный питомник',1650,60,'шт',0,'100–120 см','4 года','C10',4],
+['KG-SH-006','Дёрен белый «Элегантиссима»',1,'Северный питомник',480,500,'шт',0,'50–60 см','2 года','C3',2],
+['KG-SH-007','Самшит вечнозелёный, шар',1,'Greenline NL',2100,0,'шт',0,'Ø 30 см','5 лет','C7.5',21],
+['KG-PR-001','Хоста «Фрэнсис Уильямс»',2,'Агро-Лидер',390,600,'шт',0,'—','2 года','C2',2],
+['KG-PR-002','Лаванда узколистная «Хидкот»',2,'Агро-Лидер',290,900,'шт',0,'20–30 см','2 года','C1.5',2],
+['KG-PR-003','Лилейник «Стелла де Оро»',2,'Агро-Лидер',320,450,'шт',0,'30–40 см','2 года','C2',2],
+['KG-PR-004','Астильба «Фанал»',2,'Агро-Лидер',350,0,'шт',0,'40–50 см','2 года','C2',10],
+['KG-PR-005','Эхинацея пурпурная',2,'Агро-Лидер',310,520,'шт',0,'40–60 см','2 года','C2',2],
+['KG-RS-001','Роза чайно-гибридная «Глория Дэй»',3,'Розарий Юг',690,340,'шт',0,'40–60 см','2 года','C3',3],
+['KG-RS-002','Роза плетистая «Нью Даун»',3,'Розарий Юг',790,180,'шт',0,'80–100 см','2 года','C5',3],
+['KG-RS-003','Роза флорибунда «Шокинг Блю»',3,'Розарий Юг',650,260,'шт',0,'40–50 см','2 года','C3',3],
+['KG-RS-004','Роза почвопокровная «Фейри»',3,'Розарий Юг',520,410,'шт',0,'30–40 см','2 года','C2',3],
+['KG-BL-001','Тюльпан «Апельдорн», сетка 50 шт',4,'Голландские луковицы',1650,120,'уп',1,'—','разбор 12/+','сетка 50 шт',3],
+['KG-BL-002','Нарцисс «Тет-а-тет», сетка 25 шт',4,'Голландские луковицы',1100,90,'уп',1,'—','разбор 10/12','сетка 25 шт',3],
+['KG-BL-003','Гиацинт «Дельфт Блю», сетка 25 шт',4,'Голландские луковицы',1400,0,'уп',1,'—','разбор 15/16','сетка 25 шт',30],
+['KG-SD-001','Рассада томата «Черри», кассета 40 ячеек',5,'Агро-Лидер',980,0,'касс',1,'10–15 см','6 недель','кассета 40',120],
+['KG-SD-002','Рассада петунии ампельной, кассета 40 ячеек',5,'Агро-Лидер',1200,0,'касс',1,'10–15 см','8 недель','кассета 40',120],
+['KG-SD-003','Рассада бархатцев, кассета 40 ячеек',5,'Агро-Лидер',760,0,'касс',1,'8–12 см','6 недель','кассета 40',120],
+['KG-GR-001','Грунт для хвойных, 50 л',6,'Агро-Лидер',410,1200,'мешок',0,'—','—','мешок 50 л',1],
+['KG-GR-002','Грунт универсальный, 50 л',6,'Агро-Лидер',330,2400,'мешок',0,'—','—','мешок 50 л',1],
+['KG-GR-003','Удобрение для хвойных осеннее, 2,5 кг',6,'Агро-Лидер',540,700,'шт',0,'—','—','ведро 2,5 кг',1],
+['KG-GR-004','Кора сосновая 15–25 мм, 60 л',6,'Агро-Лидер',450,900,'мешок',0,'—','—','мешок 60 л',1],
+['KG-IN-001','Кашпо пластиковое «Ротанг», 30 л',7,'Кашпо-Pro',1350,140,'шт',0,'—','—','—',2],
+['KG-IN-002','Опора для роз, арка 2,4 м',7,'Кашпо-Pro',3200,25,'шт',0,'240 см','—','—',5],
+['KG-IN-003','Бордюрная лента 15 см × 10 м',7,'Кашпо-Pro',380,600,'шт',0,'—','—','рулон',2]
+];
+const DESC={
+ 'Хвойные':'Выращено в контейнере, корневая система сформирована, можно высаживать весь сезон. Зимостойкость: зона 4.',
+ 'Лиственные кустарники':'Контейнерное растение с закрытой корневой системой. Подходит для живых изгородей и смешанных посадок.',
+ 'Многолетники':'Крепкие растения второго года, цветут в год посадки. Удобный формат для розничной выкладки.',
+ 'Розы':'Привитые розы, 3 и более побега. Поставляются в контейнере с этикеткой-фото.',
+ 'Луковичные':'Сезонный товар: осенняя поставка, посадка сентябрь–октябрь. Упаковка с розничной этикеткой.',
+ 'Рассада':'Сезонный товар: предзаказ, отгрузки с марта по май. Кассета с ячейками для розничной продажи.',
+ 'Грунты и удобрения':'Паллетная отгрузка от 40 единиц. Сертификат соответствия прилагается.',
+ 'Кашпо и инвентарь':'Товар для сопутствующих продаж. Отгрузка коробками.'
+};
+
+/* ============ plant thumbnails (inline SVG) ============ */
+function thumb(cat,v=0){
+  const s=SHAPE[cat]||'shrub';const pot=`<path d="M34 78h32l-4 18H38z" style="fill:var(--pot)"/><rect x="31" y="74" width="38" height="6" rx="2" style="fill:var(--pot)"/>`;
+  let g='';
+  if(s==='conifer'){const w=v===1?1.15:v===2?.85:1;g=`<path d="M50 ${8+v*3}L${50-22*w} 44h${14*w}L${50-26*w} 66h${22*w}L${50-30*w} 76h${60*w}L${50+26*w-22*w+22*w} 76z" style="fill:var(--leaf)"/><path d="M50 ${8+v*3}L${50+22*w} 44h-${14*w}L${50+26*w} 66h-${22*w}L${50+30*w} 76H50z" style="fill:var(--leaf2);opacity:.55"/>`+pot}
+  else if(s==='shrub'){g=`<circle cx="36" cy="54" r="${17+v}" style="fill:var(--leaf)"/><circle cx="62" cy="50" r="${19-v}" style="fill:var(--leaf2)"/><circle cx="49" cy="38" r="17" style="fill:var(--leaf)"/>${cat==='Лиственные кустарники'&&v!==2?`<circle cx="45" cy="34" r="6" style="fill:var(--bloom);opacity:.85"/><circle cx="63" cy="46" r="5" style="fill:var(--bloom);opacity:.85"/>`:''}`+pot}
+  else if(s==='perennial'){g=`<path d="M50 76C44 60 30 50 22 48c10 10 16 18 22 28M50 76c6-16 20-26 28-28-10 10-16 18-22 28M50 76V30" stroke="var(--leaf)" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="50" cy="${26+v*2}" r="8" style="fill:var(--bloom)"/><circle cx="50" cy="${26+v*2}" r="3" style="fill:var(--accent)"/>`+pot}
+  else if(s==='rose'){g=`<path d="M50 76V36" stroke="var(--leaf)" stroke-width="4"/><ellipse cx="40" cy="58" rx="9" ry="5" style="fill:var(--leaf)" transform="rotate(-30 40 58)"/><ellipse cx="60" cy="50" rx="9" ry="5" style="fill:var(--leaf)" transform="rotate(30 60 50)"/><circle cx="50" cy="30" r="14" style="fill:var(--bloom)"/><path d="M42 30c4-6 12-6 16 0-4 4-12 4-16 0z" style="fill:var(--bg);opacity:.35"/>`+pot}
+  else if(s==='bulb'){g=`<path d="M40 30c0-8 4-14 10-18 6 4 10 10 10 18 0 6-4 10-10 10s-10-4-10-10z" style="fill:var(--bloom)"/><path d="M50 40v36" stroke="var(--leaf)" stroke-width="4"/><path d="M50 70c-10-6-14-16-14-24 8 4 12 12 14 24zM50 66c8-6 12-14 12-22-8 4-11 11-12 22z" style="fill:var(--leaf2)"/><ellipse cx="50" cy="84" rx="14" ry="10" style="fill:var(--soil)"/>`}
+  else if(s==='seedling'){g=`<rect x="16" y="66" width="68" height="22" rx="3" style="fill:var(--soil)"/>${[26,42,58,74].map(x=>`<path d="M${x} 66v-14" stroke="var(--leaf)" stroke-width="3"/><ellipse cx="${x-5}" cy="50" rx="6" ry="3.5" style="fill:var(--leaf2)"/><ellipse cx="${x+5}" cy="48" rx="6" ry="3.5" style="fill:var(--leaf)"/>`).join('')}`}
+  else if(s==='bag'){g=`<path d="M28 20h44l6 70H22z" style="fill:var(--soil)"/><rect x="34" y="40" width="32" height="24" rx="3" style="fill:var(--bg);opacity:.85"/><path d="M42 58c0-8 4-12 8-14 4 2 8 6 8 14" stroke="var(--leaf)" stroke-width="3" fill="none"/>`}
+  else {g=`<path d="M24 36h52l-7 52H31z" style="fill:var(--pot)"/><path d="M24 36h52" stroke="var(--soil)" stroke-width="4"/><path d="M30 50h40M32 64h36M34 78h32" stroke="var(--soil)" stroke-width="2" opacity=".4"/>`}
+  return `<svg viewBox="0 0 100 100" aria-hidden="true">${g}</svg>`;
+}
+
+/* ============ state ============ */
+let S;
+function freshState(){
+  const products=BASE.map(b=>({art:b[0],name:b[1],cat:CATS[b[2]],brand:b[3],price:b[4],stock:b[5],unit:b[6],seasonal:!!b[7],height:b[8],age:b[9],container:b[10],lead:b[11],status:b[5]>0?'active':'order'}));
+  const inn=['710601234','771401876','711802543','710400987','500309126'].map(makeInn10);
+  const clients=[
+   {id:'C-1041',login:'flora',name:'ООО «Садовый центр Флора»',inn:inn[0],kpp:'710601001',city:'Тула',addr:'г. Тула, ул. Садовая, д. 14',contact:'Ольга Кравец',phone:'+7 (910) 555-14-02',email:'zakupki@flora-demo.ru',mgr:'M-01',personal:null,limit:2500000,deferral:30,debt:312400,overdue:0,overdueDays:0,since:'2023-03-14'},
+   {id:'C-1042',login:'landshaft',name:'ООО «Ландшафт-Про»',inn:inn[1],kpp:'771401001',city:'Москва',addr:'г. Москва, Ленинградский пр-т, д. 80',contact:'Денис Руденко',phone:'+7 (916) 555-40-17',email:'snab@landshaft-demo.ru',mgr:'M-02',personal:null,limit:800000,deferral:21,debt:410000,overdue:96000,overdueDays:12,since:'2024-02-01'},
+   {id:'C-1043',login:'kvartal',name:'ООО «Зелёный квартал»',inn:inn[2],kpp:'711801001',city:'Новомосковск',addr:'г. Новомосковск, ул. Мира, д. 3',contact:'Светлана Лаптева',phone:'+7 (953) 555-02-88',email:'office@kvartal-demo.ru',mgr:'M-01',personal:12,limit:3000000,deferral:45,debt:0,overdue:0,overdueDays:0,since:'2022-09-20'},
+   {id:'C-1044',login:'dachny',name:'ИП Дорохов А. В. («Дачный мир»)',inn:inn[3],kpp:'—',city:'Алексин',addr:'г. Алексин, ул. Победы, д. 21',contact:'Андрей Дорохов',phone:'+7 (920) 555-77-31',email:'dachny.mir@demo.ru',mgr:'M-03',personal:null,limit:300000,deferral:14,debt:58000,overdue:58000,overdueDays:5,since:'2025-04-11'},
+   {id:'C-1045',login:'parki',name:'ООО «Парковые решения»',inn:inn[4],kpp:'500301001',city:'Серпухов',addr:'г. Серпухов, ул. Ворошилова, д. 132',contact:'Николай Жаров',phone:'+7 (903) 555-61-09',email:'tender@parki-demo.ru',mgr:'M-02',personal:null,limit:1200000,deferral:30,debt:180000,overdue:0,overdueDays:0,since:'2023-11-02'}
+  ];
+  const targets={'C-1041':1340000,'C-1042':460000,'C-1043':2250000,'C-1044':180000,'C-1045':960000};
+  const r=rng(11);const orders=[];let seq=310;
+  const nonS=products.filter(p=>!p.seasonal),seas=products.filter(p=>p.seasonal);
+  const line=(p,amount)=>{const qty=Math.max(1,Math.round(amount/p.price));return{art:p.art,name:p.name,cat:p.cat,seasonal:p.seasonal,unit:p.unit,qty,price:p.price}};
+  clients.forEach(c=>{
+    const T=targets[c.id];const n=10;const w=Array.from({length:n},()=>.6+r()*.8);const ws=w.reduce((a,b)=>a+b,0);
+    for(let i=0;i<n;i++){
+      const date=new Date(NOW.getTime()-(20+i*33+Math.floor(r()*8))*DAY);
+      const amt=T*w[i]/ws;const k=3+Math.floor(r()*2);const lines=[];
+      for(let j=0;j<k;j++){lines.push(line(nonS[Math.floor(r()*nonS.length)],amt/k))}
+      const m=date.getMonth();
+      if(m>=2&&m<=4){lines.push(line(seas[3+Math.floor(r()*3)],T*.09))}
+      if(m>=8&&m<=9){lines.push(line(seas[Math.floor(r()*2)],T*.05))}
+      orders.push({id:'З-'+(++seq),client:c.id,date:date.toISOString(),status:'Закрыт',comment:'',lines,type:'order',paid:true});
+    }
+    // older than 12 months
+    orders.push({id:'З-'+(++seq),client:c.id,date:new Date(NOW.getTime()-420*DAY).toISOString(),status:'Закрыт',comment:'',lines:[line(nonS[2],T*.18),line(nonS[8],T*.1)],type:'order',paid:true});
+  });
+  orders.sort((a,b)=>a.date.localeCompare(b.date));orders.forEach((o,i)=>o.id='З-'+String(2400+i));
+  const P=a=>products.find(p=>p.art===a);
+  let nid=2400+orders.length;
+  const add=(client,days,status,items,comment='')=>orders.push({id:'З-'+(nid++),client,date:new Date(NOW.getTime()-days*DAY).toISOString(),status,comment,type:'order',paid:false,lines:items.map(([a,q])=>{const p=P(a);return{art:a,name:p.name,cat:p.cat,seasonal:p.seasonal,unit:p.unit,qty:q,price:p.price}})});
+  add('C-1041',8,'Отгружен',[['KG-CN-001',200],['KG-CN-004',40],['KG-SH-001',180]],'Весенняя закупка под открытие второго павильона');
+  add('C-1041',2,'В сборке',[['KG-RS-001',120],['KG-RS-003',80],['KG-GR-003',60]]);
+  add('C-1041',1,'Подтверждён',[['KG-PR-002',150],['KG-PR-003',80],['KG-BL-001',15]]);
+  add('C-1042',3,'Подтверждён',[['KG-CN-002',120],['KG-SH-006',100]]);
+  add('C-1043',0,'Новый',[['KG-CN-003',150],['KG-SH-004',120],['KG-GR-004',300]],'Доставка на объект, ЖК «Липки»');
+  add('C-1045',5,'Отгружен',[['KG-CN-002',90],['KG-SH-003',120]]);
+  const regBases=[['710701456','ООО «Сад и Дом»','710701001','1227100014523','г. Тула, пр-т Ленина, д. 102','Генеральный директор Мельников Павел Сергеевич'],
+                  ['502703318','ООО «ГринЛэнд»','502701001','1195027008841','Московская обл., г. Люберцы, ул. Кирова, д. 9','Генеральный директор Осипова Анна Викторовна'],
+                  ['711201775','ООО «Питомник Заречье»','711201001','1207100006612','Тульская обл., г. Щёкино, ул. Лукашина, д. 4','Директор Гусев Олег Игоревич']];
+  const egrul={};regBases.forEach(b=>{egrul[makeInn10(b[0])]={name:b[1],kpp:b[2],ogrn:b[3],addr:b[4],head:b[5],status:'Действующая'}});
+  const innR=Object.keys(egrul);
+  const requests=[
+    {id:'R-58',date:new Date(NOW.getTime()-.2*DAY).toISOString(),inn:innR[0],...egrul[innR[0]],contact:'Павел Мельников',phone:'+7 (910) 555-30-40',email:'info@sadidom-demo.ru',comment:'Интересует хвойка и розы на сезон 2027',state:'new'},
+    {id:'R-57',date:new Date(NOW.getTime()-1.1*DAY).toISOString(),inn:innR[1],...egrul[innR[1]],contact:'Анна Осипова',phone:'+7 (926) 555-81-12',email:'opt@greenland-demo.ru',comment:'',state:'new'}
+  ];
+  const t=m=>new Date(NOW.getTime()-m*60000).toISOString();
+  return {v:3,role:'client',view:'dash',me:'C-1041',staff:'M-01',staffRole:'admin',products,clients,orders,requests,egrul,innSpare:innR[2],
+    cart:{},filters:{cats:[],avail:'all',brand:'',q:'',page:1},prodSel:{},aprodQ:'',aprodPage:1,orderFilter:'all',
+    rules:{period:12,levels:[{from:500000,pct:5},{from:1000000,pct:7},{from:2000000,pct:10}],excludeSeasonal:true,excludedCats:[],recalc:'both'},
+    imports:[{date:t(60*26),user:'Ирина Соколова',file:'price_2026-09-25.xlsx',mode:'Полная',rows:1184,ok:1181,created:0,updated:1181,archived:0,errors:[{row:412,msg:'Не заполнена цена'},{row:870,msg:'Дубль артикула KG-PR-002'},{row:1033,msg:'Остаток не число: «много»'}],src:'FTP (авто)'},
+             {date:t(60*50),user:'Мария Власова',file:'ostatki_24-09.xlsx',mode:'Только остатки',rows:36,ok:36,created:0,updated:36,archived:0,errors:[],src:'Вручную'}],
+    auto:{on:true,src:'FTP',path:'ftp://1c-export.local/price/',time:'03:00',last:t(60*6)},
+    exchange:{last:t(14),next:46,sentOrders:0,log:[]},
+    log:[
+     {t:t(3),who:'Ольга Кравец (C-1041)',type:'Клиент',msg:'Вход в личный кабинет'},
+     {t:t(14),who:'Система',type:'1С',msg:'Обмен с 1С: загружено остатков 36, цен 36, выгружено заказов 1'},
+     {t:t(95),who:'Мария Власова',type:'Заказы',msg:'Заказ переведён в статус «В сборке»'},
+     {t:t(60*6),who:'Система',type:'Прайс',msg:'Автозагрузка прайса с FTP: 1181 строк, 3 ошибки'},
+     {t:t(60*6+1),who:'Система',type:'Скидки',msg:'Ночной пересчёт накопительных скидок: изменений нет'}
+    ],
+    notif:[
+     {t:t(12),ch:'Telegram',to:'Ирина Соколова',msg:'Новая заявка на регистрацию: ООО «Сад и Дом»'},
+     {t:t(60*26),ch:'Email',to:'Алексей Петров',msg:'Критический остаток: Самшит вечнозелёный, шар — 0 шт'},
+     {t:t(60*27),ch:'Email',to:'Мария Власова',msg:'Новый заказ от ИП Дорохов А. В.'}
+    ],
+    crm:{on:true,last:t(22)},
+    notifyCh:{email:true,tg:true}
+  };
+}
+const KEY='kg-b2b-demo-v3';
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v===3)return s}catch(e){}return null}
+S=load()||freshState();
+
+/* ============ business logic ============ */
+const client=id=>S.clients.find(c=>c.id===id);
+const prod=a=>S.products.find(p=>p.art===a);
+const orderSum=o=>o.lines.reduce((s,l)=>s+l.qty*l.price*(1-(o.disc||0)/100),0);
+function periodStart(){const d=new Date(NOW);d.setMonth(d.getMonth()-S.rules.period);return d}
+function counted(l){return !(S.rules.excludeSeasonal&&l.seasonal)&&!S.rules.excludedCats.includes(l.cat)}
+function turnover(cid){
+  const from=periodStart();let t=0,ex=0;
+  S.orders.forEach(o=>{if(o.client!==cid||o.status!=='Закрыт'||new Date(o.date)<from)return;
+    o.lines.forEach(l=>{const v=l.qty*l.price*(1-(o.disc||0)/100);if(counted(l))t+=v;else ex+=v})});
+  return{t,ex};
+}
+function levelFor(t){const L=[...S.rules.levels].sort((a,b)=>a.from-b.from);let cur={from:0,pct:0},next=null;for(const l of L){if(t>=l.from)cur=l;else{next=l;break}}return{cur,next,L}}
+function disc(cid){const c=client(cid);const {t,ex}=turnover(cid);const {cur,next,L}=levelFor(t);
+  const eff=c.personal!=null?c.personal:cur.pct;return{t,ex,cur,next,L,eff,personal:c.personal,toNext:next?next.from-t:0}}
+const myPrice=(p,cid=S.me)=>Math.round(p.price*(1-disc(cid).eff/100));
+function avail(p){if(p.status==='archive')return['Архив','neutral'];if(p.stock>0)return[p.stock<30?'Мало':'В наличии',p.stock<30?'warn':'good'];return['Под заказ','info']}
+function leadTxt(p){return p.stock>0?`Отгрузка через ${p.lead} ${plural(p.lead,'день','дня','дней')}`:(p.lead>=60?'Предзаказ, отгрузка с марта':`Поставка ${p.lead} ${plural(p.lead,'день','дня','дней')}`)}
+const STATUS={'Новый':'info','Подтверждён':'info','В сборке':'warn','Отгружен':'warn','Закрыт':'good','Отменён':'neutral','Запрос счёта':'info'};
+function addLog(type,msg,who){S.log.unshift({t:new Date().toISOString(),who:who||(S.role==='admin'?mgr(S.staff).name:S.role==='client'?client(S.me).contact+' ('+S.me+')':'Гость'),type,msg})}
+function notify(ch,to,msg){S.notif.unshift({t:new Date().toISOString(),ch,to,msg})}
+function notifyMgr(mid,msg){const m=mgr(mid);if(S.notifyCh.email)notify('Email',m.name,msg);if(S.notifyCh.tg)notify('Telegram',m.name,msg)}
+function cartItems(){return Object.entries(S.cart).map(([a,q])=>({p:prod(a),q})).filter(x=>x.p&&x.q>0)}
+function cartTotal(){return cartItems().reduce((s,x)=>s+myPrice(x.p)*x.q,0)}
+function openAmount(cid){return S.orders.filter(o=>o.client===cid&&['Новый','Подтверждён','В сборке','Отгружен','Запрос счёта'].includes(o.status)).reduce((s,o)=>s+orderSum(o),0)}
+
+/* ============ UI infra ============ */
+let toastT;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,3200)}
+function modal(title,body,wide){$('#modalBox').style.maxWidth=wide?'980px':'720px';$('#modalBox').innerHTML=`<div class="modal-head"><h2>${title}</h2><button class="x-btn" data-act="close" aria-label="Закрыть">×</button></div><div class="modal-body">${body}</div>`;$('#modal').hidden=false}
+function closeModal(){$('#modal').hidden=true}
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+document.addEventListener('mouseover',e=>{const el=e.target.closest('[data-tip]');const tip=$('#tip');if(!el){tip.hidden=true;return}tip.textContent=el.dataset.tip;tip.hidden=false});
+document.addEventListener('mousemove',e=>{const tip=$('#tip');if(tip.hidden)return;tip.style.left=Math.min(e.clientX+12,innerWidth-tip.offsetWidth-8)+'px';tip.style.top=(e.clientY-36)+'px'});
+
+const NAV={
+ guest:[['login','Вход'],['register','Регистрация']],
+ client:[['dash','Дашборд'],['catalog','Каталог'],['cart','Корзина'],['quick','Быстрый заказ'],['orders','Заказы и документы'],['profile','Профиль']],
+ admin:[['a-req','Заявки на регистрацию',['admin','manager']],['a-clients','Клиенты',['admin','manager']],['a-orders','Заказы',['admin','manager']],['a-products','Товары',['admin','content']],['a-import','Загрузка прайса',['admin','content']],['a-disc','Скидки и уровни',['admin']],['a-reports','Отчёты',['admin','manager']],['a-integr','Интеграции',['admin']],['a-log','Журнал',['admin','manager','content']]]
+};
+function allowed(v){if(S.role!=='admin')return true;const it=NAV.admin.find(n=>n[0]===v);return it&&it[2].includes(S.staffRole)}
+function renderSide(){
+  const items=NAV[S.role].filter(n=>S.role!=='admin'||n[2].includes(S.staffRole));
+  const cnt={cart:Object.values(S.cart).filter(q=>q>0).length,'a-req':S.requests.filter(r=>r.state==='new').length,'a-orders':S.orders.filter(o=>o.status==='Новый'||o.status==='Запрос счёта').length};
+  let extra='';
+  if(S.role==='client'){const c=client(S.me),m=mgr(c.mgr);extra=`<div class="side-card"><span class="eyebrow">Ваш менеджер</span><b>${m.name}</b><span class="num">${m.phone}</span><span class="muted">${m.email}</span><span class="muted">Telegram ${m.tg}</span></div>`}
+  if(S.role==='admin'){extra=`<div class="side-card"><span class="eyebrow">Роль сотрудника</span><select class="input" id="staffRole" aria-label="Роль сотрудника"><option value="admin"${S.staffRole==='admin'?' selected':''}>Администратор</option><option value="manager"${S.staffRole==='manager'?' selected':''}>Менеджер</option><option value="content"${S.staffRole==='content'?' selected':''}>Контент-менеджер</option></select><span class="muted small">Меню меняется по правам доступа роли.</span></div>`}
+  $('#side').innerHTML=`<nav class="nav" aria-label="Разделы"><span class="eyebrow">${S.role==='admin'?'Админ-панель':S.role==='client'?'Личный кабинет':'Вход для партнёров'}</span>${items.map(([v,l])=>`<button data-act="go" data-view="${v}"${S.view===v?' aria-current="page"':''}>${l}${cnt[v]?`<span class="cnt">${cnt[v]}</span>`:''}</button>`).join('')}</nav>${extra}`;
+}
+function renderTop(){
+  document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.role===S.role));
+  $('#topSearch').hidden=S.role!=='client';$('#cartBtn').hidden=S.role!=='client';
+  if(S.role==='client'){$('#cartSum').textContent=rub(cartTotal());$('#cartCnt').textContent=cartItems().length}
+}
+function render(){
+  if(!allowed(S.view))S.view=NAV.admin.find(n=>n[2].includes(S.staffRole))[0];
+  renderTop();renderSide();
+  const V=VIEWS[S.view]||VIEWS.dash;$('#main').innerHTML=V();
+  if(AFTER[S.view])AFTER[S.view]();
+  save();
+}
+function go(v){S.view=v;render();window.scrollTo({top:0})}
+
+/* ============ CLIENT VIEWS ============ */
+const VIEWS={},AFTER={};
+function ladder(d){
+  const L=d.L;const max=Math.max(L[L.length-1].from*1.15,d.t*1.05);
+  const pos=v=>Math.min(100,v/max*100);
+  return `<div class="ladder"><div class="ladder-track"><div class="ladder-fill" style="width:${pos(d.t)}%"></div></div>
+  <div class="ladder-ticks"><span class="first" style="left:0"><b>0%</b>0 ₽</span>${L.map((l,i)=>`<span style="left:${pos(l.from)}%"><b>${l.pct}%</b>от ${l.from>=1e6?(l.from/1e6).toLocaleString('ru-RU')+' млн':(l.from/1e3)+' тыс'}</span>`).join('')}</div></div>`;
+}
+VIEWS.dash=()=>{
+  const c=client(S.me),d=disc(S.me),m=mgr(c.mgr);
+  const active=S.orders.filter(o=>o.client===S.me&&!['Закрыт','Отменён'].includes(o.status)).sort((a,b)=>b.date.localeCompare(a.date));
+  const open=openAmount(S.me);const availLimit=c.limit-c.debt-open;
+  const note=d.personal!=null?`Действует персональная скидка по договору <b>${d.personal}%</b>. Она имеет приоритет над накопительной (${d.cur.pct}%).`
+   :d.next?`До уровня <b>${d.next.pct}%</b> осталось закупить на <b>${rub(d.toNext)}</b>.`:'У вас максимальный уровень скидки.';
+  return `<div class="page-head"><div><h1>Добрый день, ${esc(c.contact.split(' ')[0])}</h1><p class="sub">${esc(c.name)} · договор с ${dstr(c.since)} · ID ${c.id}</p></div><button class="btn primary" data-act="go" data-view="catalog">Перейти в каталог</button></div>
+  <section class="level" aria-label="Накопительная скидка">
+    <div><div class="lbl">Ваша скидка</div><div class="big">${d.eff}<small>%</small></div><div class="lbl" style="margin-top:6px">${d.personal!=null?'персональная':'накопительная'}</div></div>
+    <div class="stack"><div class="level-note">Закупки за ${S.rules.period} мес.: <b class="num">${rub(d.t)}</b>. ${note}</div>${ladder(d)}
+    <div class="small" style="opacity:.85">${S.rules.excludeSeasonal&&d.ex>0?`Сезонные позиции на ${rub(d.ex)} в расчёт не входят. `:''}Пересчёт при закрытии заказа и каждую ночь в 03:00.</div></div>
+  </section>
+  <div class="kpis">
+    <div class="kpi"><span class="eyebrow">Закупки за ${S.rules.period} мес.</span><span class="v">${rub(d.t)}</span><span class="d">без учёта сезонных пиков</span></div>
+    <div class="kpi"><span class="eyebrow">Активные заказы</span><span class="v">${active.length}</span><span class="d">на ${rub(open)}</span></div>
+    <div class="kpi"><span class="eyebrow">Доступный лимит</span><span class="v">${rub(Math.max(0,availLimit))}</span><span class="d">из ${rub(c.limit)}, долг ${rub(c.debt)}</span></div>
+    <div class="kpi"><span class="eyebrow">Отсрочка платежа</span><span class="v">${c.deferral} ${plural(c.deferral,'день','дня','дней')}</span><span class="d">${c.overdue?`<span class="pill bad">просрочка ${rub(c.overdue)}</span>`:'просрочек нет'}</span></div>
+  </div>
+  <div class="grid2">
+    <section class="panel"><div class="panel-head"><h2>Активные заказы</h2><button class="btn ghost sm" data-act="go" data-view="orders">Все заказы</button></div>
+    ${active.length?`<div class="stack">${active.map(o=>`<div class="row" style="justify-content:space-between;border-top:1px solid var(--line);padding-top:10px"><div><b class="mono">${o.id}</b> <span class="muted small">от ${dstr(o.date)}</span><div class="small muted">${o.lines.length} ${plural(o.lines.length,'позиция','позиции','позиций')}</div></div><div class="row"><span class="num">${rub(orderSum(o))}</span><span class="pill ${STATUS[o.status]}">${o.status}</span></div></div>`).join('')}</div>`:'<p class="muted">Активных заказов нет.</p>'}
+    </section>
+    <section class="panel"><div class="panel-head"><h2>Закупки по месяцам</h2><span class="muted small">закрытые заказы</span></div>${monthChart(S.me)}</section>
+  </div>`;
+};
+function monthly(cid){
+  const arr=[];for(let i=11;i>=0;i--){const d=new Date(NOW.getFullYear(),NOW.getMonth()-i,1);arr.push({y:d.getFullYear(),m:d.getMonth(),v:0,s:0})}
+  S.orders.forEach(o=>{if(cid&&o.client!==cid)return;if(o.status!=='Закрыт'&&o.status!=='Отгружен')return;const d=new Date(o.date);const a=arr.find(x=>x.y===d.getFullYear()&&x.m===d.getMonth());if(!a)return;o.lines.forEach(l=>{const v=l.qty*l.price*(1-(o.disc||0)/100);a.v+=v;if(l.seasonal)a.s+=v})});
+  return arr;
+}
+function monthChart(cid){
+  const data=monthly(cid);const W=640,H=230,pl=52,pr=8,pt=14,pb=26;const max=Math.max(...data.map(d=>d.v),1);
+  const step=Math.pow(10,Math.floor(Math.log10(max)));const nice=[.1,.2,.25,.5,1,2,2.5,5,10].map(k=>k*step).find(v=>v*4>=max)||step*10;const top=nice*4;
+  const x0=i=>pl+i*(W-pl-pr)/12;const bw=(W-pl-pr)/12-6;const y=v=>pt+(H-pt-pb)*(1-v/top);
+  let g='';for(let k=0;k<=4;k++){const v=nice*k;g+=`<line class="gl" x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}"/><text x="${pl-8}" y="${y(v)+4}" text-anchor="end">${v>=1e6?(v/1e6).toLocaleString('ru-RU')+' млн':v>=1e3?(v/1e3)+' тыс':v}</text>`}
+  const imax=data.reduce((b,d,i)=>d.v>data[b].v?i:b,0);
+  data.forEach((d,i)=>{const x=x0(i)+3,h=Math.max(0,H-pb-y(d.v));const r=Math.min(4,h);
+    const p=h>0?`M${x},${H-pb}V${y(d.v)+r}Q${x},${y(d.v)} ${x+r},${y(d.v)}H${x+bw-r}Q${x+bw},${y(d.v)} ${x+bw},${y(d.v)+r}V${H-pb}Z`:'';
+    g+=`<g data-tip="${MONTHS[d.m]} ${d.y}: ${rub(d.v)}${d.s?` (сезонные ${rub(d.s)})`:''}"><rect class="hit" x="${x0(i)}" y="${pt}" width="${bw+6}" height="${H-pt-pb}"/>${p?`<path class="bar${i===imax||i===11?'':' dim'}" d="${p}"/>`:''}</g><text x="${x+bw/2}" y="${H-8}" text-anchor="middle">${MONTHS[d.m]}</text>`;
+    if(i===imax&&d.v>0)g+=`<text x="${x+bw/2}" y="${y(d.v)-5}" text-anchor="middle" style="fill:var(--ink);font-weight:600">${(d.v/1e3).toFixed(0)} тыс</text>`;
+  });
+  return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Закупки по месяцам">${g}</svg></div>`;
+}
+
+function catFiltered(){
+  const f=S.filters;const q=(f.q||'').trim().toLowerCase();
+  return S.products.filter(p=>p.status!=='archive'&&(!f.cats.length||f.cats.includes(p.cat))&&(f.avail==='all'||(f.avail==='in'?p.stock>0:p.stock===0))&&(!f.brand||p.brand===f.brand)&&(!q||p.art.toLowerCase().includes(q)||p.name.toLowerCase().includes(q)));
+}
+VIEWS.catalog=()=>{
+  const f=S.filters;const list=catFiltered();const per=24;const shown=list.slice(0,f.page*per);const d=disc(S.me);
+  const brands=[...new Set(S.products.map(p=>p.brand))].sort();
+  const active=[...f.cats.map(c=>['cat',c]),...(f.brand?[['brand',f.brand]]:[]),...(f.avail!=='all'?[['avail',f.avail==='in'?'В наличии':'Под заказ']]:[]),...(f.q?[['q','«'+f.q+'»']]:[])];
+  return `<div class="page-head"><div><h1>Каталог</h1><p class="sub">${list.length} ${plural(list.length,'позиция','позиции','позиций')} · цены с вашей скидкой ${d.eff}%</p></div></div>
+  <div class="panel filters">
+    <div class="filter-row">${CATS.map(c=>`<button class="tag" data-act="fcat" data-cat="${c}" aria-pressed="${f.cats.includes(c)}">${c}</button>`).join('')}</div>
+    <div class="filter-row">
+      <select class="input" id="fAvail" style="width:auto" aria-label="Наличие"><option value="all">Любое наличие</option><option value="in"${f.avail==='in'?' selected':''}>В наличии</option><option value="order"${f.avail==='order'?' selected':''}>Под заказ</option></select>
+      <select class="input" id="fBrand" style="width:auto" aria-label="Бренд / питомник"><option value="">Все бренды и питомники</option>${brands.map(b=>`<option${f.brand===b?' selected':''}>${esc(b)}</option>`).join('')}</select>
+      ${active.length?`<span class="muted small" style="margin-left:6px">Фильтры:</span>${active.map(([k,v])=>`<button class="tag" data-act="funset" data-k="${k}" data-v="${esc(v)}">${esc(v)} <span class="x">×</span></button>`).join('')}<button class="btn ghost sm" data-act="fclear">Сбросить</button>`:''}
+    </div>
+  </div>
+  ${shown.length?`<div class="cards">${shown.map(card).join('')}</div>`:'<div class="panel empty">По этим фильтрам ничего не найдено. Попробуйте убрать часть фильтров.</div>'}
+  ${list.length>shown.length?`<div class="row" style="justify-content:center"><button class="btn" data-act="more">Показать ещё ${Math.min(per,list.length-shown.length)} из ${list.length-shown.length}</button></div>`:''}`;
+};
+function card(p){
+  const [a,cls]=avail(p);const inCart=S.cart[p.art]||0;
+  return `<article class="card"><button class="thumb" data-act="pd" data-art="${p.art}" aria-label="${esc(p.name)}">${thumb(p.cat)}</button>
+  <div class="card-body"><div class="row" style="justify-content:space-between"><span class="mono muted">${p.art}</span><span class="pill ${cls}">${a}${p.stock>0?' · '+fmt(p.stock):''}</span></div>
+  <button class="card-name" data-act="pd" data-art="${p.art}">${esc(p.name)}</button>
+  <div class="chars">${[p.height!=='—'?p.height:'',p.age!=='—'?p.age:'',p.container!=='—'?p.container:''].filter(Boolean).join(' · ')}${p.seasonal?' · <b style="color:var(--accent)">сезонный</b>':''}</div>
+  <div class="chars">${leadTxt(p)}</div>
+  <div class="price-row"><span class="price">${rub(myPrice(p))}</span>${disc(S.me).eff?`<span class="old">${rub(p.price)}</span>`:''}<span class="muted small">/ ${p.unit}</span></div>
+  <div class="buy">${qtyCtl(p.art,inCart||10,'c')}<button class="btn ${inCart?'':'primary'} sm" data-act="add" data-art="${p.art}" data-src="c">${inCart?'В корзине: '+inCart:'В корзину'}</button></div></div></article>`;
+}
+function qtyCtl(art,v,src){return `<span class="qty"><button data-act="qd" data-art="${art}" data-src="${src}" data-d="-1" aria-label="Меньше">−</button><input id="q-${src}-${art}" type="number" min="1" value="${v}" aria-label="Количество"><button data-act="qd" data-art="${art}" data-src="${src}" data-d="1" aria-label="Больше">+</button></span>`}
+function productModal(art,v=0){
+  const p=prod(art);const [a,cls]=avail(p);
+  modal(esc(p.name),`<div class="pd"><div><div class="gal-main">${thumb(p.cat,v)}</div><div class="gal-th">${[0,1,2].map(i=>`<button data-act="gal" data-art="${art}" data-v="${i}" aria-pressed="${i===v}" aria-label="Фото ${i+1}">${thumb(p.cat,i)}</button>`).join('')}</div></div>
+  <div class="stack"><div class="row"><span class="mono muted">${p.art}</span><span class="pill ${cls}">${a}${p.stock>0?' · '+fmt(p.stock)+' '+p.unit:''}</span>${p.seasonal?'<span class="pill warn">Сезонный товар</span>':''}</div>
+  <p>${DESC[p.cat]}</p>
+  <dl class="spec"><dt>Категория</dt><dd>${p.cat}</dd><dt>Бренд / питомник</dt><dd>${esc(p.brand)}</dd><dt>Высота</dt><dd>${p.height}</dd><dt>Возраст</dt><dd>${p.age}</dd><dt>Контейнер</dt><dd>${p.container}</dd><dt>Единица</dt><dd>${p.unit}</dd><dt>Срок поставки</dt><dd>${leadTxt(p)}</dd></dl>
+  <div class="hr"></div>
+  <div><div class="price-row"><span class="price" style="font-size:1.5rem">${rub(myPrice(p))}</span><span class="old">${rub(p.price)}</span><span class="muted small">/ ${p.unit}</span></div><div class="small muted">Цена по договору со скидкой ${disc(S.me).eff}%</div></div>
+  <div class="buy">${qtyCtl(p.art,S.cart[p.art]||10,'m')}<button class="btn primary" data-act="add" data-art="${p.art}" data-src="m">В корзину</button></div>
+  <button class="btn" data-act="invreq" data-art="${p.art}">Запросить счёт на эту позицию</button></div></div>`,true);
+}
+
+VIEWS.cart=()=>{
+  const items=cartItems();const c=client(S.me);const tot=cartTotal();const base=items.reduce((s,x)=>s+x.p.price*x.q,0);
+  const left=c.limit-c.debt-openAmount(S.me);
+  if(!items.length)return `<div class="page-head"><div><h1>Корзина</h1></div></div><div class="panel empty">Корзина пуста. Добавьте товары из <a href="#" data-act="go" data-view="catalog">каталога</a> или загрузите список в <a href="#" data-act="go" data-view="quick">быстром заказе</a>.</div>`;
+  return `<div class="page-head"><div><h1>Корзина</h1><p class="sub">${items.length} ${plural(items.length,'позиция','позиции','позиций')}</p></div><button class="btn ghost" data-act="cartclear">Очистить корзину</button></div>
+  <div class="tbl-wrap"><table><thead><tr><th>Артикул</th><th>Товар</th><th>Наличие</th><th class="r">Цена</th><th>Количество</th><th class="r">Сумма</th><th></th></tr></thead><tbody>
+  ${items.map(({p,q})=>{const [a,cls]=avail(p);return `<tr><td class="mono">${p.art}</td><td>${esc(p.name)}</td><td><span class="pill ${cls}">${a}</span>${q>p.stock&&p.stock>0?`<div class="small" style="color:var(--warn)">В наличии ${p.stock}, остальное под заказ</div>`:''}</td><td class="r num">${rub(myPrice(p))}</td><td><input class="input num" type="number" min="0" value="${q}" data-ch="cartq" data-art="${p.art}" style="width:90px" aria-label="Количество ${esc(p.name)}"></td><td class="r num"><b>${rub(myPrice(p)*q)}</b></td><td><button class="btn ghost sm" data-act="cartdel" data-art="${p.art}" aria-label="Удалить">Удалить</button></td></tr>`}).join('')}
+  </tbody></table></div>
+  <div class="grid2">
+    <div class="panel stack"><div class="field"><label for="ocomment">Комментарий к заказу</label><textarea class="input" id="ocomment" style="font-family:var(--f-body)" placeholder="Например: доставка на склад в Туле, разгрузка до 16:00">${esc(S.draftComment||'')}</textarea></div>
+    <div class="small muted">Заказ будет привязан к менеджеру: <b style="color:var(--ink)">${mgr(c.mgr).name}</b>. Менеджер получит уведомление на почту и в Telegram.</div></div>
+    <div class="panel stack">
+      <div class="row" style="justify-content:space-between"><span class="muted">По базовым ценам</span><span class="num">${rub(base)}</span></div>
+      <div class="row" style="justify-content:space-between"><span class="muted">Скидка ${disc(S.me).eff}%</span><span class="num" style="color:var(--good)">−${rub(base-tot)}</span></div>
+      <div class="hr"></div>
+      <div class="row" style="justify-content:space-between"><b>Итого</b><span class="price">${rub(tot)}</span></div>
+      ${tot>left?`<div class="note warn">Сумма превышает доступный лимит (${rub(Math.max(0,left))}). Заказ уйдёт менеджеру на согласование.</div>`:`<div class="small muted">Оплата с отсрочкой ${c.deferral} ${plural(c.deferral,'день','дня','дней')}. Доступный лимит: ${rub(left)}.</div>`}
+      <div class="row"><button class="btn primary" data-act="checkout" data-type="order" style="flex:1">Оформить заказ</button><button class="btn" data-act="checkout" data-type="invoice" style="flex:1">Запросить счёт</button></div>
+    </div>
+  </div>`;
+};
+
+VIEWS.quick=()=>`<div class="page-head"><div><h1>Быстрый заказ</h1><p class="sub">Загрузите файл Excel или CSV с двумя колонками: артикул и количество. Или вставьте список ниже.</p></div></div>
+  <div class="grid2">
+   <div class="panel stack"><h2>Из файла</h2>
+    <div class="drop" id="qDrop"><b>Перетащите .xlsx или .csv сюда</b><span class="muted small">Первая колонка: артикул, вторая: количество. Строка заголовков допускается.</span><label class="btn"><input type="file" id="qFile" accept=".xlsx,.xls,.csv,.txt" hidden>Выбрать файл</label></div>
+    <button class="btn ghost sm" data-act="qtpl">Скачать шаблон для быстрого заказа (.xlsx)</button>
+   </div>
+   <div class="panel stack"><h2>Списком</h2>
+    <div class="field"><label for="qText">Артикул и количество через «;», табуляцию или пробел, по одной позиции в строке</label><textarea class="input" id="qText">${esc(S.qText??'KG-CN-001;40\nKG-SH-001;25\nKG-PR-002 100\nKG-RS-003\t30\nKG-XX-999;5\nKG-GR-001;0')}</textarea></div>
+    <button class="btn primary" data-act="qparse">Проверить список</button>
+   </div>
+  </div>
+  <div id="qResult">${S.qRes?qResult(S.qRes):''}</div>`;
+function parseQuick(rows){
+  const res=[];const seen={};
+  rows.forEach((r,i)=>{let [a,q]=r;a=String(a??'').trim().toUpperCase();if(!a)return;if(i===0&&/артикул|article|sku/i.test(a))return;
+    const qty=Number(String(q??'').replace(',','.').trim());const p=prod(a);
+    let st='ok',msg='';
+    if(!p){st='bad';msg='Артикул не найден'}else if(p.status==='archive'){st='bad';msg='Позиция в архиве'}
+    else if(!q&&q!==0||isNaN(qty)){st='bad';msg='Не указано количество'}else if(qty<=0){st='bad';msg='Количество должно быть больше 0'}
+    else if(seen[a]!=null){st='warn';msg='Повтор артикула, количества сложены';res[seen[a]].qty+=qty;return}
+    else if(p.stock<qty){st='warn';msg=p.stock?`В наличии ${p.stock}, остальное под заказ`:'Под заказ: '+leadTxt(p).toLowerCase()}
+    if(p&&st!=='bad')seen[a]=res.length;
+    res.push({line:i+1,art:a,qty:isNaN(qty)?'—':qty,p,st,msg});
+  });
+  return res;
+}
+function qResult(res){
+  const ok=res.filter(r=>r.st!=='bad');const sum=ok.reduce((s,r)=>s+myPrice(r.p)*r.qty,0);
+  return `<section class="panel"><div class="panel-head"><h2>Результат проверки</h2><div class="row"><span class="pill good">Найдено ${ok.length}</span>${res.length-ok.length?`<span class="pill bad">Ошибок ${res.length-ok.length}</span>`:''}</div></div>
+  <div class="tbl-wrap"><table><thead><tr><th>Строка</th><th>Артикул</th><th>Товар</th><th class="r">Кол-во</th><th class="r">Сумма</th><th>Статус</th></tr></thead><tbody>
+  ${res.map(r=>`<tr><td class="num">${r.line}</td><td class="mono">${esc(r.art)}</td><td>${r.p?esc(r.p.name):'<span class="muted">—</span>'}</td><td class="r num">${r.qty}</td><td class="r num">${r.st!=='bad'?rub(myPrice(r.p)*r.qty):'—'}</td><td>${r.st==='ok'?'<span class="pill good">OK</span>':`<span class="pill ${r.st}">${r.msg}</span>`}</td></tr>`).join('')}
+  </tbody></table></div>
+  <div class="row" style="justify-content:flex-end;margin-top:14px"><span class="muted">Будет добавлено на</span><span class="price">${rub(sum)}</span><button class="btn primary" data-act="qadd"${ok.length?'':' disabled'}>Добавить ${ok.length} ${plural(ok.length,'позицию','позиции','позиций')} в корзину</button></div></section>`;
+}
+AFTER.quick=()=>{
+  const f=$('#qFile');f.onchange=()=>f.files[0]&&readQuickFile(f.files[0]);
+  const d=$('#qDrop');['dragover','dragenter'].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.add('over')}));
+  ['dragleave','drop'].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.remove('over')}));
+  d.addEventListener('drop',e=>{const file=e.dataTransfer.files[0];if(file)readQuickFile(file)});
+};
+function readRows(file,cb){
+  const rd=new FileReader();
+  if(/\.(csv|txt)$/i.test(file.name)){rd.onload=()=>cb(String(rd.result).split(/\r?\n/).map(l=>l.split(/[;,\t]/)));rd.readAsText(file,'utf-8')}
+  else{rd.onload=()=>{try{const wb=XLSX.read(rd.result,{type:'array'});cb(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:''}))}catch(e){toast('Не удалось прочитать файл. Сохраните его как .xlsx или .csv и загрузите снова.')}};rd.readAsArrayBuffer(file)}
+}
+function readQuickFile(file){readRows(file,rows=>{S.qRes=parseQuick(rows);$('#qResult').innerHTML=qResult(S.qRes);toast(`Файл «${file.name}» обработан`)})}
+
+VIEWS.orders=()=>{
+  const list=S.orders.filter(o=>o.client===S.me).sort((a,b)=>b.date.localeCompare(a.date));
+  return `<div class="page-head"><div><h1>Заказы и документы</h1><p class="sub">${list.length} ${plural(list.length,'заказ','заказа','заказов')}. Счета, УПД и акты формируются в 1С и доступны в PDF.</p></div></div>
+  <div class="tbl-wrap"><table><thead><tr><th>Номер</th><th>Дата</th><th>Статус</th><th class="r">Позиций</th><th class="r">Сумма</th><th>Документы</th></tr></thead><tbody>
+  ${list.map(o=>`<tr><td class="mono"><a href="#" data-act="order" data-id="${o.id}">${o.id}</a></td><td class="num">${dstr(o.date)}</td><td><span class="pill ${STATUS[o.status]||'info'}">${o.status}</span></td><td class="r num">${o.lines.length}</td><td class="r num">${rub(orderSum(o))}</td><td><div class="row" style="gap:6px">${docsFor(o).map(d=>`<button class="btn sm" data-act="doc" data-id="${o.id}" data-doc="${d}">${d} PDF</button>`).join('')}</div></td></tr>`).join('')}
+  </tbody></table></div>`;
+};
+function docsFor(o){const d=['Счёт'];if(['Отгружен','Закрыт'].includes(o.status))d.push('УПД');if(o.status==='Закрыт')d.push('Акт сверки');return d}
+function orderModal(id){
+  const o=S.orders.find(x=>x.id===id);const c=client(o.client);
+  modal(`Заказ ${o.id}`,`<div class="stack"><div class="row"><span class="pill ${STATUS[o.status]||'info'}">${o.status}</span><span class="muted">от ${dstr(o.date)} · ${esc(c.name)} · менеджер ${mgr(c.mgr).name}</span></div>
+  ${o.comment?`<div class="note">Комментарий: ${esc(o.comment)}</div>`:''}
+  <div class="tbl-wrap"><table><thead><tr><th>Артикул</th><th>Товар</th><th class="r">Кол-во</th><th class="r">Цена</th><th class="r">Сумма</th></tr></thead><tbody>${o.lines.map(l=>`<tr><td class="mono">${l.art}</td><td>${esc(l.name)}${l.seasonal?' <span class="pill warn">сезон</span>':''}</td><td class="r num">${fmt(l.qty)} ${l.unit}</td><td class="r num">${rub(l.price*(1-(o.disc||0)/100))}</td><td class="r num">${rub(l.qty*l.price*(1-(o.disc||0)/100))}</td></tr>`).join('')}</tbody></table></div>
+  <div class="row" style="justify-content:space-between"><div class="row">${docsFor(o).map(d=>`<button class="btn sm" data-act="doc" data-id="${o.id}" data-doc="${d}">${d} PDF</button>`).join('')}</div><span class="price">${rub(orderSum(o))}</span></div></div>`,true);
+}
+function docModal(id,kind){
+  const o=S.orders.find(x=>x.id===id);const c=client(o.client);const sum=orderSum(o);const nds=sum*20/120;
+  const title=kind==='Счёт'?`Счёт на оплату № ${o.id.replace('З-','')} от ${dstr(o.date)}`:kind==='УПД'?`Универсальный передаточный документ № ${o.id.replace('З-','')} от ${dstr(o.date)}`:`Акт сверки взаимных расчётов на ${dstr(NOW)}`;
+  modal(kind+' · '+o.id,`<div class="note" style="margin-bottom:12px">В рабочей версии документ формирует 1С, а клиент скачивает готовый PDF. Здесь показан макет документа на демо-данных.</div>
+  <div class="doc"><div class="req"><span>Поставщик:</span><b>ООО «Красивая Грядка» (реквизиты демо)</b><span>Покупатель:</span><b>${esc(c.name)}, ИНН ${c.inn}${c.kpp!=='—'?', КПП '+c.kpp:''}</b><span>Адрес покупателя:</span><span>${esc(c.addr)}</span><span>Основание:</span><span>Договор поставки ${c.id} от ${dstr(c.since)}</span></div>
+  <h2>${title}</h2>
+  <table><thead><tr><th>№</th><th>Товар</th><th>Кол-во</th><th>Ед.</th><th>Цена</th><th>Сумма</th></tr></thead><tbody>${o.lines.map((l,i)=>`<tr><td>${i+1}</td><td>${esc(l.name)} (${l.art})</td><td class="r num">${fmt(l.qty)}</td><td>${l.unit}</td><td class="r num">${fmt(l.price*(1-(o.disc||0)/100))}</td><td class="r num">${fmt(l.qty*l.price*(1-(o.disc||0)/100))}</td></tr>`).join('')}</tbody></table>
+  <p style="text-align:right;margin-top:10px">Итого: <b>${rub(sum)}</b><br>в т. ч. НДС 20%: ${rub(nds)}</p>
+  ${kind==='Счёт'?`<p class="small">Оплата в течение ${c.deferral} дней с даты отгрузки согласно договору.</p>`:''}</div>`,true);
+}
+
+VIEWS.profile=()=>{const c=client(S.me),m=mgr(c.mgr);return `<div class="page-head"><div><h1>Профиль компании</h1><p class="sub">Реквизиты загружены из ЕГРЮЛ при регистрации. Изменения согласует менеджер.</p></div></div>
+  <div class="grid2"><section class="panel"><h2 style="margin-bottom:14px">Реквизиты</h2><dl class="spec"><dt>Компания</dt><dd>${esc(c.name)}</dd><dt>ИНН</dt><dd class="mono">${c.inn}</dd><dt>КПП</dt><dd class="mono">${c.kpp}</dd><dt>Юр. адрес</dt><dd>${esc(c.addr)}</dd><dt>Клиентский ID</dt><dd class="mono">${c.id}</dd><dt>Логин</dt><dd class="mono">${c.login}</dd><dt>Договор с</dt><dd>${dstr(c.since)}</dd></dl></section>
+  <section class="panel stack"><h2>Контакты</h2>
+   <div class="field"><label for="pfContact">Контактное лицо</label><input class="input" id="pfContact" value="${esc(c.contact)}"></div>
+   <div class="field"><label for="pfPhone">Телефон</label><input class="input" id="pfPhone" value="${esc(c.phone)}"></div>
+   <div class="field"><label for="pfEmail">Email для уведомлений</label><input class="input" id="pfEmail" value="${esc(c.email)}"></div>
+   <button class="btn primary" data-act="pfsave" style="align-self:flex-start">Сохранить контакты</button></section>
+  <section class="panel"><h2 style="margin-bottom:14px">Ответственный менеджер</h2><dl class="spec"><dt>Менеджер</dt><dd>${m.name}</dd><dt>Телефон</dt><dd class="num">${m.phone}</dd><dt>Email</dt><dd>${m.email}</dd><dt>Telegram</dt><dd>${m.tg}</dd></dl></section>
+  <section class="panel"><h2 style="margin-bottom:14px">Условия договора</h2><dl class="spec"><dt>Кредитный лимит</dt><dd class="num">${rub(c.limit)}</dd><dt>Отсрочка</dt><dd>${c.deferral} ${plural(c.deferral,'день','дня','дней')}</dd><dt>Скидка</dt><dd>${disc(S.me).eff}% ${c.personal!=null?'(персональная)':'(накопительная)'}</dd></dl></section></div>`};
+
+/* ============ GUEST ============ */
+VIEWS.login=()=>`<div class="login panel stack"><h1>Вход для оптовых клиентов</h1><p class="muted small">Логин выдаёт персональный менеджер после подтверждения регистрации. В демо можно войти под любым тестовым клиентом.</p>
+ <div class="field"><label for="lgLogin">Логин</label><select class="input" id="lgLogin">${S.clients.map(c=>`<option value="${c.id}">${c.login} · ${esc(c.name)}</option>`).join('')}</select></div>
+ <div class="field"><label for="lgPass">Пароль</label><input class="input" id="lgPass" type="password" value="demo-password"></div>
+ <button class="btn primary" data-act="login">Войти</button>
+ <div class="hr"></div><p class="small">Ещё не работаете с нами? <a href="#" data-act="go" data-view="register">Оставьте заявку на регистрацию</a></p></div>`;
+VIEWS.register=()=>{const r=S.reg||{};const known=Object.keys(S.egrul).filter(i=>!S.requests.some(q=>q.inn===i)&&!S.clients.some(c=>c.inn===i));
+ return `<div class="page-head"><div><h1>Заявка на оптовое сотрудничество</h1><p class="sub">Введите ИНН. Реквизиты подтянутся из ЕГРЮЛ, останется указать контакты.</p></div></div>
+ <div class="grid2"><section class="panel stack">
+  <div class="field"><label for="rgInn">ИНН организации или ИП</label><div class="row" style="flex-wrap:nowrap"><input class="input mono" id="rgInn" inputmode="numeric" maxlength="12" value="${esc(r.inn||'')}" placeholder="10 или 12 цифр"><button class="btn primary" data-act="inncheck">Проверить</button></div>
+  ${known.length?`<span class="muted small">Для демо: ${known.map(i=>`<a href="#" data-act="innfill" data-inn="${i}" class="mono">${i}</a>`).join(', ')}</span>`:''}</div>
+  <div id="innRes">${r.res||''}</div>
+  <div class="field"><label for="rgName">Название компании</label><input class="input" id="rgName" value="${esc(r.name||'')}"></div>
+  <div class="field"><label for="rgContact">Контактное лицо</label><input class="input" id="rgContact" value="${esc(r.contact||'')}" placeholder="Имя и фамилия"></div>
+  <div class="grid2" style="gap:12px"><div class="field"><label for="rgPhone">Телефон</label><input class="input" id="rgPhone" value="${esc(r.phone||'')}" placeholder="+7"></div><div class="field"><label for="rgEmail">Email</label><input class="input" id="rgEmail" type="email" value="${esc(r.email||'')}"></div></div>
+  <div class="field"><label for="rgComment">Что планируете закупать</label><input class="input" id="rgComment" value="${esc(r.comment||'')}"></div>
+  <button class="btn primary" data-act="regsubmit">Отправить заявку</button>
+ </section>
+ <section class="panel stack"><h2>Как проходит подключение</h2>
+  <ol class="stack" style="padding-left:18px;margin:0"><li>Вы отправляете заявку. ИНН проверяется по ЕГРЮЛ автоматически.</li><li>Менеджеры получают уведомление на почту и в Telegram.</li><li>Менеджер проверяет компанию, подтверждает заявку и становится вашим ответственным.</li><li>На почту приходит письмо с логином, паролем и ссылкой на личный кабинет.</li></ol>
+  <div class="note">После отправки переключитесь в режим «Сотрудник», чтобы подтвердить свою заявку.</div></section></div>`};
+
+/* ============ ADMIN VIEWS ============ */
+VIEWS['a-req']=()=>{const list=S.requests.slice().sort((a,b)=>b.date.localeCompare(a.date));
+ return `<div class="page-head"><div><h1>Заявки на регистрацию</h1><p class="sub">Проверьте данные из ЕГРЮЛ, подтвердите заявку и назначьте ответственного менеджера.</p></div></div>
+ ${list.length?list.map(r=>`<section class="panel"><div class="panel-head"><div><h2>${esc(r.name)}</h2><span class="muted small">Заявка ${r.id} от ${tstr(r.date)}</span></div>${r.state==='new'?'<span class="pill info">Новая</span>':r.state==='ok'?`<span class="pill good">Подтверждена · ${esc(r.login)}</span>`:'<span class="pill neutral">Отклонена</span>'}</div>
+  <div class="grid2"><dl class="spec"><dt>ИНН</dt><dd class="mono">${r.inn}</dd><dt>КПП</dt><dd class="mono">${r.kpp}</dd><dt>ОГРН</dt><dd class="mono">${r.ogrn}</dd><dt>Адрес</dt><dd>${esc(r.addr)}</dd><dt>Руководитель</dt><dd>${esc(r.head)}</dd><dt>Статус в ЕГРЮЛ</dt><dd><span class="pill good">${r.status}</span></dd></dl>
+  <dl class="spec"><dt>Контакт</dt><dd>${esc(r.contact)}</dd><dt>Телефон</dt><dd>${esc(r.phone)}</dd><dt>Email</dt><dd>${esc(r.email)}</dd><dt>Комментарий</dt><dd>${esc(r.comment||'—')}</dd></dl></div>
+  ${r.state==='new'?`<div class="row" style="margin-top:14px;justify-content:flex-end"><select class="input" id="rm-${r.id}" style="width:auto" aria-label="Ответственный менеджер">${MANAGERS.map(m=>`<option value="${m.id}"${m.id===S.staff?' selected':''}>${m.name}${m.id===S.staff?' (я)':''}</option>`).join('')}</select><button class="btn" data-act="reqno" data-id="${r.id}">Отклонить</button><button class="btn primary" data-act="reqok" data-id="${r.id}">Подтвердить и назначить</button></div>`:''}
+ </section>`).join(''):'<div class="panel empty">Новых заявок нет.</div>'}`};
+
+VIEWS['a-clients']=()=>`<div class="page-head"><div><h1>Клиенты</h1><p class="sub">${S.clients.length} ${plural(S.clients.length,'клиент','клиента','клиентов')}. Нажмите на строку, чтобы изменить персональные условия.</p></div></div>
+ <div class="tbl-wrap"><table><thead><tr><th>ID</th><th>Компания</th><th>ИНН</th><th>Менеджер</th><th class="r">Оборот ${S.rules.period} мес.</th><th>Скидка</th><th class="r">Лимит</th><th class="r">Отсрочка</th><th>Оплата</th></tr></thead><tbody>
+ ${S.clients.map(c=>{const d=disc(c.id);return `<tr class="click" data-act="cedit" data-id="${c.id}"><td class="mono">${c.id}</td><td><b>${esc(c.name)}</b><div class="small muted">${esc(c.contact)} · ${esc(c.city)}</div></td><td class="mono">${c.inn}</td><td>${mgr(c.mgr).name}</td><td class="r num">${rub(d.t)}</td><td>${d.personal!=null?`<span class="pill info">${d.personal}% персон.</span>`:`<span class="pill ${d.eff?'good':'neutral'}">${d.eff}% накоп.</span>`}</td><td class="r num">${rub(c.limit)}</td><td class="r num">${c.deferral} дн.</td><td>${c.overdue?`<span class="pill bad">просрочка ${c.overdueDays} дн.</span>`:'<span class="pill good">в срок</span>'}</td></tr>`}).join('')}
+ </tbody></table></div>`;
+function clientModal(id){const c=client(id),d=disc(id);
+ modal(esc(c.name),`<div class="grid2"><div class="stack">
+  <div class="field"><label for="ceMgr">Ответственный менеджер</label><select class="input" id="ceMgr">${MANAGERS.map(m=>`<option value="${m.id}"${m.id===c.mgr?' selected':''}>${m.name} (${m.id})</option>`).join('')}</select></div>
+  <div class="field"><label for="cePers">Персональная скидка по договору, %</label><input class="input num" id="cePers" type="number" min="0" max="50" step="0.5" value="${c.personal??''}" placeholder="пусто = действует накопительная"></div>
+  <div class="field"><label for="ceLimit">Кредитный лимит, ₽</label><input class="input num" id="ceLimit" type="number" min="0" step="10000" value="${c.limit}"></div>
+  <div class="field"><label for="ceDef">Отсрочка платежа, дней</label><input class="input num" id="ceDef" type="number" min="0" max="120" value="${c.deferral}"></div>
+  <button class="btn primary" data-act="csave" data-id="${id}">Сохранить условия</button></div>
+  <div class="stack"><dl class="spec"><dt>Внутренний ID</dt><dd class="mono">${c.id}</dd><dt>Логин</dt><dd class="mono">${c.login}</dd><dt>ИНН / КПП</dt><dd class="mono">${c.inn} / ${c.kpp}</dd><dt>Адрес</dt><dd>${esc(c.addr)}</dd><dt>Контакт</dt><dd>${esc(c.contact)}, ${esc(c.phone)}</dd><dt>Email</dt><dd>${esc(c.email)}</dd></dl>
+  <div class="note">Оборот за ${S.rules.period} мес.: <b>${rub(d.t)}</b>${d.ex?` (не учтено сезонных ${rub(d.ex)})`:''}. Накопительный уровень: <b>${d.cur.pct}%</b>. ${c.personal!=null?`Персональная скидка ${c.personal}% имеет приоритет.`:''}</div>
+  <div class="small muted">Задолженность ${rub(c.debt)}${c.overdue?`, из них просрочено ${rub(c.overdue)} (${c.overdueDays} дн.)`:''}.</div></div></div>`,true)}
+
+VIEWS['a-orders']=()=>{const f=S.orderFilter;const st=['all','Новый','Запрос счёта','Подтверждён','В сборке','Отгружен','Закрыт'];
+ const list=S.orders.filter(o=>f==='all'||o.status===f).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,60);
+ return `<div class="page-head"><div><h1>Заказы</h1><p class="sub">Смена статуса уходит в 1С. При закрытии заказа накопительная скидка клиента пересчитывается сразу.</p></div></div>
+ <div class="note good">Попробуйте: закройте заказ ООО «Садовый центр Флора» в статусе «Отгружен». Оборот клиента перейдёт порог 2 млн ₽, и скидка вырастет с 7% до 10%.</div>
+ <div class="filter-row">${st.map(s=>`<button class="tag" data-act="ofilter" data-s="${s}" aria-pressed="${f===s}">${s==='all'?'Все':s} <span class="muted">${s==='all'?S.orders.length:S.orders.filter(o=>o.status===s).length}</span></button>`).join('')}</div>
+ <div class="tbl-wrap"><table><thead><tr><th>Номер</th><th>Дата</th><th>Клиент</th><th>Менеджер</th><th class="r">Сумма</th><th>Статус</th><th>Документы</th></tr></thead><tbody>
+ ${list.map(o=>{const c=client(o.client);return `<tr><td class="mono"><a href="#" data-act="order" data-id="${o.id}">${o.id}</a></td><td class="num">${dstr(o.date)}</td><td>${esc(c.name)}</td><td>${mgr(c.mgr).name}</td><td class="r num">${rub(orderSum(o))}</td><td><select class="input" data-ch="ostatus" data-id="${o.id}" style="width:auto;min-width:140px" aria-label="Статус заказа ${o.id}">${['Новый','Запрос счёта','Подтверждён','В сборке','Отгружен','Закрыт','Отменён'].map(s=>`<option${s===o.status?' selected':''}>${s}</option>`).join('')}</select></td><td>${docsFor(o).map(d=>`<button class="btn sm ghost" data-act="doc" data-id="${o.id}" data-doc="${d}">${d}</button>`).join('')}</td></tr>`}).join('')}
+ </tbody></table></div>`};
+
+VIEWS['a-products']=()=>{const q=S.aprodQ.toLowerCase();const all=S.products.filter(p=>!q||p.art.toLowerCase().includes(q)||p.name.toLowerCase().includes(q));
+ const per=50,page=S.aprodPage;const list=all.slice(0,page*per);const sel=Object.keys(S.prodSel).filter(k=>S.prodSel[k]);
+ return `<div class="page-head"><div><h1>Товары</h1><p class="sub">${S.products.length} позиций, из них в архиве ${S.products.filter(p=>p.status==='archive').length}. Цены и остатки можно менять прямо в таблице.</p></div><div class="row"><button class="btn" data-act="export">Экспорт в Excel</button><button class="btn primary" data-act="go" data-view="a-import">Загрузить прайс</button></div></div>
+ <div class="panel row"><input class="input" id="apQ" style="max-width:320px" placeholder="Поиск по артикулу или названию" value="${esc(S.aprodQ)}" aria-label="Поиск товаров">
+  <span class="muted small">Выбрано: ${sel.length}</span>
+  <input class="input num" id="bulkPct" type="number" step="1" value="5" style="width:80px" aria-label="Процент изменения цены"><button class="btn sm" data-act="bulkprice"${sel.length?'':' disabled'}>Изменить цену на %</button>
+  <select class="input" id="bulkSt" style="width:auto" aria-label="Статус"><option value="active">Активен</option><option value="order">Под заказ</option><option value="archive">Архив</option></select><button class="btn sm" data-act="bulkst"${sel.length?'':' disabled'}>Назначить статус</button></div>
+ <div class="tbl-wrap"><table><thead><tr><th><input type="checkbox" id="selAll" aria-label="Выбрать все"></th><th>Артикул</th><th>Наименование</th><th>Категория</th><th>Сезон</th><th class="r">Цена, ₽</th><th class="r">Остаток</th><th>Статус</th></tr></thead><tbody>
+ ${list.map(p=>`<tr><td><input type="checkbox" data-ch="psel" data-art="${p.art}"${S.prodSel[p.art]?' checked':''} aria-label="Выбрать ${p.art}"></td><td class="mono">${p.art}</td><td>${esc(p.name)}</td><td class="small">${p.cat}</td><td>${p.seasonal?'<span class="pill warn">да</span>':'<span class="muted">нет</span>'}</td><td class="r"><input class="input num" type="number" value="${p.price}" data-ch="pprice" data-art="${p.art}" style="width:100px;text-align:right" aria-label="Цена ${p.art}"></td><td class="r"><input class="input num" type="number" value="${p.stock}" data-ch="pstock" data-art="${p.art}" style="width:90px;text-align:right" aria-label="Остаток ${p.art}"></td><td><span class="pill ${avail(p)[1]}">${p.status==='archive'?'Архив':p.stock>0?'В наличии':'Под заказ'}</span></td></tr>`).join('')}
+ </tbody></table></div>${all.length>list.length?`<div class="row" style="justify-content:center"><button class="btn" data-act="apmore">Показать ещё (${all.length-list.length})</button></div>`:''}`};
+AFTER['a-products']=()=>{const i=$('#apQ');i.oninput=()=>{S.aprodQ=i.value;S.aprodPage=1;const pos=i.selectionStart;render();const j=$('#apQ');j.focus();j.setSelectionRange(pos,pos)};
+ $('#selAll').onchange=e=>{S.products.forEach(p=>{if(!S.aprodQ||p.art.toLowerCase().includes(S.aprodQ.toLowerCase())||p.name.toLowerCase().includes(S.aprodQ.toLowerCase()))S.prodSel[p.art]=e.target.checked});render()}};
+
+/* ---- price import ---- */
+const COLS=['Артикул','Наименование','Категория','Цена','Остаток','Единица измерения','Сезонность'];
+const MODES={full:'Полная',price:'Только цены',stock:'Только остатки',cat:'Только категории'};
+VIEWS['a-import']=()=>{const pv=S.preview;const imp=S.imp||(S.imp={mode:'full',missing:'archive'});
+ return `<div class="page-head"><div><h1>Загрузка прайса</h1><p class="sub">Файл .xlsx с колонками: ${COLS.join(', ')}.</p></div><button class="btn" data-act="tpl">Скачать шаблон Excel</button></div>
+ <div class="grid2"><section class="panel stack"><h2>Новая загрузка</h2>
+  <div class="field"><span style="font-weight:500;color:var(--muted)">Что обновлять</span><div class="opt-group">${Object.entries(MODES).map(([k,v])=>`<label class="radio"><input type="radio" name="imode" value="${k}"${imp.mode===k?' checked':''} data-ch="imode">${v}</label>`).join('')}</div></div>
+  <div class="field"><span style="font-weight:500;color:var(--muted)">Позиции, которых нет в файле</span><div class="opt-group"><label class="radio"><input type="radio" name="imiss" value="archive"${imp.missing==='archive'?' checked':''} data-ch="imiss">Перевести в «Архив»</label><label class="radio"><input type="radio" name="imiss" value="zero"${imp.missing==='zero'?' checked':''} data-ch="imiss">Пометить «Нет в наличии»</label></div><span class="muted small">Применяется только при полной загрузке.</span></div>
+  <div class="drop" id="iDrop"><b>Перетащите файл прайса сюда</b><span class="muted small">.xlsx, до 20 000 строк</span><div class="row" style="justify-content:center"><label class="btn primary"><input type="file" id="iFile" accept=".xlsx,.xls,.csv" hidden>Загрузить прайс</label><button class="btn" data-act="demofile">Демо-файл на 1 200 строк</button></div></div>
+ </section>
+ <section class="panel stack"><h2>Автозагрузка</h2>
+  <label class="check"><input type="checkbox" id="autoOn"${S.auto.on?' checked':''}>Загружать прайс автоматически</label>
+  <div class="grid2" style="gap:12px"><div class="field"><label for="autoSrc">Источник</label><select class="input" id="autoSrc"><option${S.auto.src==='FTP'?' selected':''}>FTP</option><option${S.auto.src==='Сетевая папка'?' selected':''}>Сетевая папка</option></select></div><div class="field"><label for="autoTime">Время запуска</label><input class="input" id="autoTime" type="time" value="${S.auto.time}"></div></div>
+  <div class="field"><label for="autoPath">Путь</label><input class="input mono" id="autoPath" value="${esc(S.auto.path)}"></div>
+  <label class="check"><input type="checkbox" checked disabled>Также запускать при появлении нового файла в папке</label>
+  <div class="row" style="justify-content:space-between"><span class="small muted">Последний запуск: ${tstr(S.auto.last)}</span><div class="row"><button class="btn sm" data-act="autosave">Сохранить</button><button class="btn sm" data-act="autorun">Запустить сейчас</button></div></div>
+ </section></div>
+ ${pv?previewHtml(pv):''}
+ <section class="stack"><h2>История загрузок</h2><div class="tbl-wrap"><table><thead><tr><th>Дата</th><th>Пользователь</th><th>Источник</th><th>Файл</th><th>Режим</th><th class="r">Строк</th><th class="r">Обновлено</th><th class="r">Создано</th><th class="r">В архив</th><th>Ошибки</th></tr></thead><tbody>
+ ${S.imports.map((h,i)=>`<tr><td class="num">${tstr(h.date)}</td><td>${esc(h.user)}</td><td>${h.src}</td><td class="mono">${esc(h.file)}</td><td>${h.mode}</td><td class="r num">${fmt(h.rows)}</td><td class="r num">${fmt(h.updated)}</td><td class="r num">${fmt(h.created)}</td><td class="r num">${fmt(h.archived)}</td><td>${h.errors.length?`<button class="btn sm ghost" data-act="ierr" data-i="${i}" style="color:var(--bad)">${h.errors.length} ${plural(h.errors.length,'ошибка','ошибки','ошибок')}</button>`:'<span class="pill good">нет</span>'}</td></tr>`).join('')}
+ </tbody></table></div></section>`};
+AFTER['a-import']=()=>{
+ const f=$('#iFile');f.onchange=()=>{const file=f.files[0];if(file)readRows(file,rows=>{S.preview=analyze(rows,file.name,'Вручную');render()})};
+ const d=$('#iDrop');['dragover','dragenter'].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.add('over')}));['dragleave','drop'].forEach(ev=>d.addEventListener(ev,e=>{e.preventDefault();d.classList.remove('over')}));
+ d.addEventListener('drop',e=>{const file=e.dataTransfer.files[0];if(file)readRows(file,rows=>{S.preview=analyze(rows,file.name,'Вручную');render()})});
+};
+function analyze(rows,file,src){
+ const mode=S.imp.mode;const head=(rows[0]||[]).map(h=>String(h).trim().toLowerCase());const idx={};
+ COLS.forEach(c=>idx[c]=head.indexOf(c.toLowerCase()));
+ const missCols=COLS.filter(c=>idx[c]<0&&(c==='Артикул'||mode==='full'&&['Наименование','Цена','Остаток'].includes(c)||mode==='price'&&c==='Цена'||mode==='stock'&&c==='Остаток'||mode==='cat'&&c==='Категория'));
+ if(missCols.length)return{file,src,mode,fatal:`В файле нет обязательных колонок: ${missCols.join(', ')}. Скачайте шаблон и проверьте заголовки в первой строке.`,rows:rows.length-1,errors:[],ops:[]};
+ const errors=[],ops=[],seen=new Set();let upd=0,cre=0;
+ const g=(r,c)=>idx[c]>=0?r[idx[c]]:undefined;
+ for(let i=1;i<rows.length;i++){const r=rows[i];if(!r||r.every(x=>String(x).trim()===''))continue;const n=i+1;
+  const art=String(g(r,'Артикул')??'').trim().toUpperCase();
+  if(!art){errors.push({row:n,msg:'Не заполнен артикул'});continue}
+  if(seen.has(art)){errors.push({row:n,msg:`Дубль артикула ${art}`});continue}seen.add(art);
+  const ex=prod(art);const priceRaw=g(r,'Цена'),stockRaw=g(r,'Остаток');
+  const price=Number(String(priceRaw??'').replace(/\s/g,'').replace(',','.'));const stock=Number(String(stockRaw??'').replace(/\s/g,''));
+  if((mode==='full'||mode==='price')&&(String(priceRaw??'').trim()===''||isNaN(price)||price<=0)){errors.push({row:n,msg:String(priceRaw??'').trim()===''?`Не заполнена цена (${art})`:`Цена не число: «${priceRaw}» (${art})`});continue}
+  if((mode==='full'||mode==='stock')&&(String(stockRaw??'').trim()===''||isNaN(stock)||stock<0||!Number.isInteger(stock))){errors.push({row:n,msg:`Остаток не целое число: «${stockRaw}» (${art})`});continue}
+  if(mode==='cat'&&!String(g(r,'Категория')??'').trim()){errors.push({row:n,msg:`Не заполнена категория (${art})`});continue}
+  if(!ex){if(mode!=='full'){errors.push({row:n,msg:`Артикул ${art} не найден. Новые позиции создаются только при полной загрузке`});continue}
+   const name=String(g(r,'Наименование')??'').trim();if(!name){errors.push({row:n,msg:`Новая позиция ${art} без наименования`});continue}cre++}else upd++;
+  ops.push({art,exists:!!ex,name:String(g(r,'Наименование')??'').trim(),cat:String(g(r,'Категория')??'').trim(),price,stock,unit:String(g(r,'Единица измерения')??'шт').trim()||'шт',seasonal:/^(да|yes|1|сезон)/i.test(String(g(r,'Сезонность')??''))});
+ }
+ const arch=mode==='full'?S.products.filter(p=>p.status!=='archive'&&!seen.has(p.art)).map(p=>p.art):[];
+ return{file,src,mode,rows:rows.length-1,errors,ops,upd,cre,arch};
+}
+function previewHtml(pv){
+ if(pv.fatal)return `<section class="panel"><div class="note bad"><b>Файл «${esc(pv.file)}» не загружен.</b> ${pv.fatal}</div></section>`;
+ return `<section class="panel stack"><div class="panel-head" style="margin:0"><div><h2>Проверка файла «${esc(pv.file)}»</h2><span class="muted small">Режим: ${MODES[pv.mode]}. Изменения ещё не применены.</span></div><div class="row"><button class="btn" data-act="icancel">Отменить</button><button class="btn primary" data-act="iapply"${pv.ops.length?'':' disabled'}>Применить: ${fmt(pv.ops.length)} ${plural(pv.ops.length,'строка','строки','строк')}</button></div></div>
+ <div class="sumrow"><div class="sum"><div class="small muted">Строк в файле</div><div class="v">${fmt(pv.rows)}</div></div><div class="sum good"><div class="small">Обновится</div><div class="v">${fmt(pv.upd)}</div></div><div class="sum info"><div class="small">Новых позиций</div><div class="v">${fmt(pv.cre)}</div></div><div class="sum warn"><div class="small">${S.imp.missing==='archive'?'Уйдёт в архив':'Станет «нет в наличии»'}</div><div class="v">${fmt(pv.arch.length)}</div></div><div class="sum bad"><div class="small">Ошибок, строки пропущены</div><div class="v">${fmt(pv.errors.length)}</div></div></div>
+ ${pv.arch.length?`<div class="small muted">Нет в файле: ${pv.arch.slice(0,6).map(a=>`<span class="mono">${a}</span>`).join(', ')}${pv.arch.length>6?' и ещё '+(pv.arch.length-6):''}</div>`:''}
+ ${pv.errors.length?`<div class="tbl-wrap"><table><thead><tr><th>Строка</th><th>Ошибка</th></tr></thead><tbody>${pv.errors.slice(0,30).map(e=>`<tr><td class="num">${e.row}</td><td>${esc(e.msg)}</td></tr>`).join('')}</tbody></table></div>${pv.errors.length>30?`<span class="muted small">Показаны первые 30 из ${pv.errors.length}</span>`:''}`:'<div class="note good">Ошибок не найдено.</div>'}
+ </section>`;
+}
+function applyImport(){
+ const pv=S.preview;const mode=pv.mode;
+ pv.ops.forEach(o=>{let p=prod(o.art);
+  if(!p){const cat=CATS.find(c=>c.toLowerCase()===o.cat.toLowerCase())||CATS[1];p={art:o.art,name:o.name,cat,brand:'Новый поставщик',price:o.price,stock:o.stock,unit:o.unit,seasonal:o.seasonal,height:'—',age:'—',container:'—',lead:3,status:'active'};S.products.push(p)}
+  if(mode==='full'){p.price=o.price;p.stock=o.stock;if(o.name)p.name=o.name;if(o.cat){const c=CATS.find(c=>c.toLowerCase()===o.cat.toLowerCase());if(c)p.cat=c}p.seasonal=o.seasonal;p.unit=o.unit}
+  if(mode==='price')p.price=o.price;if(mode==='stock')p.stock=o.stock;
+  if(mode==='cat'){const c=CATS.find(c=>c.toLowerCase()===o.cat.toLowerCase());if(c)p.cat=c}
+  if(p.status!=='archive'||mode==='full')p.status=p.stock>0?'active':'order'});
+ pv.arch.forEach(a=>{const p=prod(a);if(S.imp.missing==='archive')p.status='archive';else{p.stock=0;p.status='order'}});
+ const who=pv.src==='Вручную'?mgr(S.staff).name:'Система';
+ S.imports.unshift({date:new Date().toISOString(),user:who,file:pv.file,mode:MODES[mode],rows:pv.rows,ok:pv.ops.length,created:pv.cre,updated:pv.upd,archived:pv.arch.length,errors:pv.errors,src:pv.src});
+ addLog('Прайс',`Загрузка «${pv.file}» (${MODES[mode]}): обновлено ${pv.upd}, создано ${pv.cre}, ${S.imp.missing==='archive'?'в архив':'обнулено'} ${pv.arch.length}, ошибок ${pv.errors.length}`,who);
+ const crit=S.products.filter(p=>p.status!=='archive'&&p.stock>0&&p.stock<10).length;if(crit)notifyMgr('M-02',`Критические остатки после загрузки прайса: ${crit} ${plural(crit,'позиция','позиции','позиций')}`);
+ S.preview=null;toast(`Прайс применён: ${fmt(pv.ops.length)} строк`);render();
+}
+function demoRows(){
+ const r=rng(Date.now()%100000);const rows=[COLS];
+ const keep=S.products.filter(p=>p.status!=='archive');const drop=new Set([keep[5]?.art,keep[12]?.art].filter(Boolean));
+ keep.forEach(p=>{if(drop.has(p.art))return;rows.push([p.art,p.name,p.cat,Math.round(p.price*(1+(r()-.4)*.12)),Math.floor(r()*r()*800),p.unit,p.seasonal?'Да':'Нет'])});
+ const variants=[['Туя западная «Даника»',0,'шт'],['Туя западная «Голден Глоб»',0,'шт'],['Можжевельник чешуйчатый «Блю Стар»',0,'шт'],['Пихта корейская',0,'шт'],['Ель сербская',0,'шт'],['Гортензия крупнолистная',1,'шт'],['Пузыреплодник калинолистный',1,'шт'],['Лапчатка кустарниковая',1,'шт'],['Чубушник венечный',1,'шт'],['Вейгела цветущая',1,'шт'],['Флокс метельчатый',2,'шт'],['Пион травянистый',2,'шт'],['Ирис бородатый',2,'шт'],['Гейхера',2,'шт'],['Роза шраб',3,'шт'],['Крокус, сетка 50 шт',4,'уп'],['Рассада клубники, кассета 40',5,'касс'],['Торф верховой, 250 л',6,'мешок'],['Горшок керамический',7,'шт']];
+ const sizes=['C2','C3','C5','C7.5','C10','C15','C20','P9'];const hs=['20–30 см','30–40 см','40–60 см','60–80 см','80–100 см','100–125 см','125–150 см'];
+ let n=1;while(rows.length<1201){const v=variants[n%variants.length];const s=sizes[Math.floor(r()*sizes.length)],h=hs[Math.floor(r()*hs.length)];
+  rows.push([`KG-N${String(n).padStart(4,'0')}`,`${v[0]}, ${s}, ${h}`,CATS[v[1]],Math.round((300+r()*4000)/10)*10,Math.floor(r()*400),v[2],v[1]===4||v[1]===5?'Да':'Нет']);n++}
+ rows[40][3]='';rows[311][3]='';rows[702][3]='по запросу';rows[118][0]='';rows[955][0]='';rows[480]=[...rows[20]];rows[1004]=[...rows[33]];rows[860][4]='много';rows[1100][4]=-5;rows[600][1]='';rows[600][0]='KG-N9999';
+ return rows;
+}
+function writeXlsx(aoa,name,widths){
+ try{const ws=XLSX.utils.aoa_to_sheet(aoa);if(widths)ws['!cols']=widths.map(w=>({wch:w}));const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Прайс');XLSX.writeFile(wb,name);toast(`Файл ${name} сформирован`)}
+ catch(e){toast('Скачивание файлов недоступно в этом окне просмотра. На сайте кнопка отдаёт .xlsx')}
+}
+
+/* ---- discounts ---- */
+VIEWS['a-disc']=()=>{const R=S.rules;const L=[...R.levels].sort((a,b)=>a.from-b.from);
+ return `<div class="page-head"><div><h1>Скидки и уровни</h1><p class="sub">Правила накопительной скидки. Изменения сразу видны в таблице справа.</p></div><button class="btn primary" data-act="rsave">Сохранить правила</button></div>
+ <div class="grid2"><section class="panel stack"><h2>Уровни</h2>
+  <div class="tbl-wrap"><table><thead><tr><th>Оборот от, ₽</th><th>Скидка, %</th><th></th></tr></thead><tbody>${L.map((l,i)=>`<tr><td><input class="input num" type="number" step="50000" min="0" value="${l.from}" data-ch="lfrom" data-i="${R.levels.indexOf(l)}" aria-label="Порог уровня"></td><td><input class="input num" type="number" step="0.5" min="0" max="50" value="${l.pct}" data-ch="lpct" data-i="${R.levels.indexOf(l)}" style="width:90px" aria-label="Процент скидки"></td><td><button class="btn ghost sm" data-act="ldel" data-i="${R.levels.indexOf(l)}">Удалить</button></td></tr>`).join('')}</tbody></table></div>
+  <button class="btn sm" data-act="ladd" style="align-self:flex-start">Добавить уровень</button>
+  <div class="grid2" style="gap:12px"><div class="field"><label for="rPeriod">Период расчёта</label><select class="input" id="rPeriod">${[3,6,12,24].map(m=>`<option value="${m}"${R.period===m?' selected':''}>Последние ${m} мес.</option>`).join('')}</select></div>
+  <div class="field"><label for="rRecalc">Когда пересчитывать</label><select class="input" id="rRecalc"><option value="both"${R.recalc==='both'?' selected':''}>При закрытии заказа и ночью</option><option value="close"${R.recalc==='close'?' selected':''}>Только при закрытии заказа</option><option value="night"${R.recalc==='night'?' selected':''}>Раз в сутки в 03:00</option></select></div></div>
+  <h2 style="margin-top:8px">Исключения</h2>
+  <label class="check"><input type="checkbox" id="rSeas"${R.excludeSeasonal?' checked':''}>Не учитывать сезонные товары (пики продаж)</label>
+  <div class="field"><span style="font-weight:500;color:var(--muted)">Не учитывать категории</span><div class="filter-row">${CATS.map(c=>`<button class="tag" data-act="rcat" data-cat="${c}" aria-pressed="${R.excludedCats.includes(c)}">${c}</button>`).join('')}</div></div>
+  <div class="note">Персональная скидка по договору всегда имеет приоритет над накопительной.</div>
+ </section>
+ <section class="panel stack"><h2>Как правила действуют на клиентов</h2>
+  <div class="tbl-wrap"><table><thead><tr><th>Клиент</th><th class="r">Оборот</th><th class="r">Не учтено</th><th>Уровень</th><th>Итог</th></tr></thead><tbody>
+  ${S.clients.map(c=>{const d=disc(c.id);return `<tr><td>${esc(c.name)}</td><td class="r num">${rub(d.t)}</td><td class="r num muted">${d.ex?rub(d.ex):'—'}</td><td class="num">${d.cur.pct}%${d.next?`<div class="small muted">до ${d.next.pct}%: ${rub(d.toNext)}</div>`:''}</td><td><b>${d.eff}%</b>${d.personal!=null?' <span class="pill info">персон.</span>':''}</td></tr>`}).join('')}
+  </tbody></table></div>
+  <button class="btn" data-act="recalc" style="align-self:flex-start">Пересчитать сейчас</button>
+ </section></div>`};
+
+/* ---- reports ---- */
+VIEWS['a-reports']=()=>{
+ const from=new Date(NOW);from.setMonth(from.getMonth()-12);
+ const cl=S.orders.filter(o=>['Закрыт','Отгружен'].includes(o.status)&&new Date(o.date)>=from);
+ const total=cl.reduce((s,o)=>s+orderSum(o),0);
+ const byM=MANAGERS.map(m=>({m,v:cl.filter(o=>client(o.client).mgr===m.id).reduce((s,o)=>s+orderSum(o),0),n:cl.filter(o=>client(o.client).mgr===m.id).length})).sort((a,b)=>b.v-a.v);
+ const maxM=Math.max(...byM.map(x=>x.v),1);
+ const overdue=S.clients.filter(c=>c.overdue>0);
+ const byCat=CATS.map(c=>{const ps=S.products.filter(p=>p.cat===c&&p.status!=='archive');const stockV=ps.reduce((s,p)=>s+p.stock*p.price,0);let sold=0;cl.forEach(o=>o.lines.forEach(l=>{if(l.cat===c)sold+=l.qty*l.price}));const days=sold?stockV/(sold/365):null;return{c,stockV,sold,days}});
+ const levels=[0,...S.rules.levels.map(l=>l.pct)].sort((a,b)=>a-b);
+ return `<div class="page-head"><div><h1>Отчёты</h1><p class="sub">Последние 12 месяцев, заказы в статусах «Отгружен» и «Закрыт».</p></div><button class="btn" data-act="repx">Выгрузить в Excel</button></div>
+ <div class="kpis"><div class="kpi"><span class="eyebrow">Продажи</span><span class="v">${rub(total)}</span><span class="d">${cl.length} заказов</span></div><div class="kpi"><span class="eyebrow">Средний чек</span><span class="v">${rub(total/Math.max(1,cl.length))}</span><span class="d">по отгруженным</span></div><div class="kpi"><span class="eyebrow">Дебиторка</span><span class="v">${rub(S.clients.reduce((s,c)=>s+c.debt,0))}</span><span class="d">${S.clients.filter(c=>c.debt).length} клиента</span></div><div class="kpi"><span class="eyebrow">Просрочено</span><span class="v" style="color:var(--bad)">${rub(overdue.reduce((s,c)=>s+c.overdue,0))}</span><span class="d">${overdue.length} ${plural(overdue.length,'клиент','клиента','клиентов')}</span></div></div>
+ <div class="grid2"><section class="panel"><div class="panel-head"><h2>Продажи по менеджерам</h2></div><div class="stack">${byM.map(x=>`<div class="hbar" data-tip="${x.m.name}: ${rub(x.v)}, ${x.n} заказов"><span>${x.m.name}</span><div class="trk"><div class="fill" style="width:${x.v/maxM*100}%"></div></div><span class="val">${rub(x.v)}</span></div>`).join('')}</div></section>
+ <section class="panel"><div class="panel-head"><h2>Продажи по месяцам</h2><span class="muted small">все клиенты</span></div>${monthChart(null)}</section></div>
+ <div class="grid2"><section class="stack"><h2>Динамика скидок</h2><div class="tbl-wrap"><table><thead><tr><th>Уровень</th><th class="r">Клиентов</th><th>Кто</th></tr></thead><tbody>${levels.map(p=>{const cs=S.clients.filter(c=>disc(c.id).eff===p);return `<tr><td><b>${p}%</b></td><td class="r num">${cs.length}</td><td class="small">${cs.map(c=>esc(c.name)).join(', ')||'—'}</td></tr>`}).join('')}${S.clients.filter(c=>c.personal!=null&&!levels.includes(c.personal)).map(c=>`<tr><td><b>${c.personal}%</b> <span class="pill info">персон.</span></td><td class="r num">1</td><td class="small">${esc(c.name)}</td></tr>`).join('')}</tbody></table></div>
+ <p class="small muted">Изменения уровней за период: ${S.log.filter(l=>l.type==='Скидки'&&/→/.test(l.msg)).length} (см. журнал).</p></section>
+ <section class="stack"><h2>Просрочки оплаты</h2><div class="tbl-wrap"><table><thead><tr><th>Клиент</th><th>Менеджер</th><th class="r">Сумма</th><th class="r">Дней</th></tr></thead><tbody>${overdue.map(c=>`<tr><td>${esc(c.name)}</td><td>${mgr(c.mgr).name}</td><td class="r num">${rub(c.overdue)}</td><td class="r"><span class="pill ${c.overdueDays>10?'bad':'warn'}">${c.overdueDays}</span></td></tr>`).join('')||'<tr><td colspan="4" class="muted">Просрочек нет</td></tr>'}</tbody></table></div></section></div>
+ <section class="stack"><h2>Оборачиваемость остатков</h2><div class="tbl-wrap"><table><thead><tr><th>Категория</th><th class="r">Остаток в ценах прайса</th><th class="r">Продано за 12 мес.</th><th class="r">Оборачиваемость, дней</th></tr></thead><tbody>${byCat.map(x=>`<tr><td>${x.c}</td><td class="r num">${rub(x.stockV)}</td><td class="r num">${rub(x.sold)}</td><td class="r">${x.days==null?'<span class="muted">нет продаж</span>':`<span class="pill ${x.days>120?'bad':x.days>60?'warn':'good'}">${fmt(x.days)}</span>`}</td></tr>`).join('')}</tbody></table></div></section>`};
+
+/* ---- integrations ---- */
+VIEWS['a-integr']=()=>{const E=S.exchange;return `<div class="page-head"><div><h1>Интеграции</h1><p class="sub">Статус обмена данными. В демо обмен имитируется.</p></div></div>
+ <div class="grid2">
+ <section class="panel integ"><div class="integ-top"><span class="integ-ic">1С</span><div><h2>1С: Управление торговлей 11</h2><span class="small muted">Заказы, статусы, остатки, цены · каждый час и по событию</span></div><span class="pill good" style="margin-left:auto">Работает</span></div>
+  <dl class="spec"><dt>Последний обмен</dt><dd>${tstr(E.last)}</dd><dt>Следующий</dt><dd>через ${E.next} мин</dd><dt>В очереди на выгрузку</dt><dd>${S.orders.filter(o=>o.status==='Новый'||o.status==='Запрос счёта').length} заказа</dd></dl>
+  <button class="btn primary" data-act="x1c" style="align-self:flex-start">Запустить обмен сейчас</button></section>
+ <section class="panel integ"><div class="integ-top"><span class="integ-ic">B24</span><div><h2>Битрикс24 (CRM)</h2><span class="small muted">Клиенты, менеджеры, история заказов и обращений</span></div><span class="pill ${S.crm.on?'good':'neutral'}" style="margin-left:auto">${S.crm.on?'Работает':'Выключено'}</span></div>
+  <dl class="spec"><dt>Последняя синхронизация</dt><dd>${tstr(S.crm.last)}</dd><dt>Направление</dt><dd>Двусторонняя</dd></dl>
+  <div class="row"><button class="btn" data-act="crmsync">Синхронизировать</button><label class="check"><input type="checkbox" id="crmOn"${S.crm.on?' checked':''}>Включено</label></div></section>
+ <section class="panel integ"><div class="integ-top"><span class="integ-ic">ИНН</span><div><h2>Проверка ИНН по ЕГРЮЛ</h2><span class="small muted">Подгрузка реквизитов при регистрации (например, через DaData)</span></div><span class="pill good" style="margin-left:auto">Работает</span></div>
+  <p class="small muted">Контрольная сумма ИНН проверяется на стороне браузера, реквизиты запрашиваются с сервера.</p></section>
+ <section class="panel integ"><div class="integ-top"><span class="integ-ic">@</span><div><h2>Уведомления</h2><span class="small muted">Новые заявки, новые заказы, критические остатки</span></div></div>
+  <div class="row"><label class="check"><input type="checkbox" id="chEmail"${S.notifyCh.email?' checked':''}>Email</label><label class="check"><input type="checkbox" id="chTg"${S.notifyCh.tg?' checked':''}>Telegram</label></div>
+  <div class="feed">${S.notif.slice(0,6).map(n=>`<div><time>${tstr(n.t)}</time><span><b>${n.ch}</b> → ${esc(n.to)}: ${esc(n.msg)}</span></div>`).join('')}</div></section>
+ </div>`};
+AFTER['a-integr']=()=>{$('#crmOn').onchange=e=>{S.crm.on=e.target.checked;render()};$('#chEmail').onchange=e=>{S.notifyCh.email=e.target.checked;save()};$('#chTg').onchange=e=>{S.notifyCh.tg=e.target.checked;save()}};
+
+VIEWS['a-log']=()=>{const types=['Все',...new Set(S.log.map(l=>l.type))];const f=S.logF||'Все';
+ return `<div class="page-head"><div><h1>Журнал</h1><p class="sub">Действия пользователей, загрузки прайса, обмен с 1С и пересчёт скидок.</p></div></div>
+ <div class="filter-row">${types.map(t=>`<button class="tag" data-act="logf" data-t="${t}" aria-pressed="${f===t}">${t}</button>`).join('')}</div>
+ <div class="tbl-wrap"><table><thead><tr><th>Время</th><th>Кто</th><th>Раздел</th><th>Событие</th></tr></thead><tbody>${S.log.filter(l=>f==='Все'||l.type===f).slice(0,150).map(l=>`<tr><td class="num" style="white-space:nowrap">${tstr(l.t)}</td><td>${esc(l.who)}</td><td><span class="pill neutral">${l.type}</span></td><td>${esc(l.msg)}</td></tr>`).join('')}</tbody></table></div>`};
+
+/* ============ actions ============ */
+function recalcAll(reason){const before=S.lastLevels||{};const changes=[];
+ S.clients.forEach(c=>{const d=disc(c.id);const prev=before[c.id];if(prev!=null&&prev!==d.cur.pct){changes.push(`${c.name}: ${prev}% → ${d.cur.pct}%`);if(c.personal==null)notifyMgr(c.mgr,`Скидка клиента ${c.name} изменилась: ${prev}% → ${d.cur.pct}%`)}before[c.id]=d.cur.pct});
+ S.lastLevels=before;addLog('Скидки',`${reason}: ${changes.length?changes.join('; '):'изменений нет'}`);return changes}
+if(!S.lastLevels){S.lastLevels={};S.clients.forEach(c=>S.lastLevels[c.id]=disc(c.id).cur.pct)}
+
+const ACT={
+ go:d=>{go(d.view)},home:()=>go(S.role==='admin'?'a-orders':S.role==='client'?'dash':'login'),
+ role:d=>{S.role=d.role;S.view=d.role==='admin'?(S.requests.some(r=>r.state==='new')?'a-req':'a-orders'):d.role==='client'?'dash':'register';closeModal();render()},
+ reset:()=>{try{localStorage.removeItem(KEY)}catch(e){}S=freshState();S.lastLevels={};S.clients.forEach(c=>S.lastLevels[c.id]=disc(c.id).cur.pct);render();toast('Демо-данные восстановлены')},
+ close:closeModal,
+ fcat:d=>{const f=S.filters;f.cats=f.cats.includes(d.cat)?f.cats.filter(c=>c!==d.cat):[...f.cats,d.cat];f.page=1;render()},
+ funset:d=>{const f=S.filters;if(d.k==='cat')f.cats=f.cats.filter(c=>c!==d.v);if(d.k==='brand')f.brand='';if(d.k==='avail')f.avail='all';if(d.k==='q'){f.q='';$('#q').value=''}render()},
+ fclear:()=>{S.filters={cats:[],avail:'all',brand:'',q:'',page:1};$('#q').value='';render()},
+ more:()=>{S.filters.page++;render()},
+ pd:d=>productModal(d.art),gal:d=>productModal(d.art,+d.v),
+ qd:d=>{const i=document.getElementById(`q-${d.src}-${d.art}`);i.value=Math.max(1,(+i.value||0)+ +d.d)},
+ add:d=>{const i=document.getElementById(`q-${d.src}-${d.art}`);const q=Math.max(1,+i.value||1);S.cart[d.art]=q;const p=prod(d.art);toast(`${p.name}: ${q} ${p.unit} в корзине`);if(d.src==='m')closeModal();render()},
+ invreq:d=>{const i=document.getElementById(`q-m-${d.art}`);S.cart={[d.art]:Math.max(1,+i.value||1)};closeModal();checkout('invoice')},
+ cartdel:d=>{delete S.cart[d.art];render()},cartclear:()=>{S.cart={};render()},
+ checkout:d=>checkout(d.type),
+ qparse:()=>{S.qText=$('#qText').value;S.qRes=parseQuick(S.qText.split(/\r?\n/).map(l=>l.trim().split(/\s*[;,\t]\s*|\s+/)));$('#qResult').innerHTML=qResult(S.qRes);save()},
+ qadd:()=>{const ok=S.qRes.filter(r=>r.st!=='bad');ok.forEach(r=>S.cart[r.art]=(S.cart[r.art]||0)+r.qty);S.qRes=null;toast(`Добавлено ${ok.length} ${plural(ok.length,'позиция','позиции','позиций')}`);go('cart')},
+ qtpl:()=>writeXlsx([['Артикул','Количество'],['KG-CN-001',40],['KG-SH-001',25]],'bystryi_zakaz_shablon.xlsx',[16,12]),
+ order:(d,el,e)=>{e.preventDefault();orderModal(d.id)},doc:d=>docModal(d.id,d.doc),
+ pfsave:()=>{const c=client(S.me);c.contact=$('#pfContact').value;c.phone=$('#pfPhone').value;c.email=$('#pfEmail').value;addLog('Клиент','Изменены контактные данные');render();toast('Контакты сохранены')},
+ login:()=>{S.me=$('#lgLogin').value;S.role='client';S.cart={};addLog('Клиент','Вход в личный кабинет');go('dash')},
+ innfill:(d,el,e)=>{e.preventDefault();$('#rgInn').value=d.inn;ACT.inncheck()},
+ inncheck:()=>{const v=$('#rgInn').value.trim();const r=S.reg=Object.assign(S.reg||{},{inn:v});
+  if(!/^\d+$/.test(v)||!(v.length===10||v.length===12))r.res=`<div class="note bad">ИНН должен состоять из 10 цифр (организация) или 12 цифр (ИП).</div>`;
+  else if(!innOk(v))r.res=`<div class="note bad">Контрольная сумма ИНН не сходится. Проверьте цифры.</div>`;
+  else if(S.clients.some(c=>c.inn===v))r.res=`<div class="note warn">Компания с этим ИНН уже работает с нами. Обратитесь к своему менеджеру за доступом.</div>`;
+  else if(S.egrul[v]){const e=S.egrul[v];r.name=e.name;r.eg=e;r.res=`<div class="note good"><b>Найдено в ЕГРЮЛ:</b> ${esc(e.name)} · ${e.status}<br>КПП ${e.kpp} · ОГРН ${e.ogrn}<br>${esc(e.addr)}<br>${esc(e.head)}</div>`}
+  else{r.eg=null;r.res=`<div class="note warn">ИНН корректный, но в демо-справочнике его нет. Заполните название вручную, менеджер проверит данные.</div>`}
+  r.contact=$('#rgContact').value;r.phone=$('#rgPhone').value;r.email=$('#rgEmail').value;r.comment=$('#rgComment').value;render()},
+ regsubmit:()=>{const r=S.reg||{};const inn=$('#rgInn').value.trim();const name=$('#rgName').value.trim();const contact=$('#rgContact').value.trim();const email=$('#rgEmail').value.trim();const phone=$('#rgPhone').value.trim();
+  if(!innOk(inn)){toast('Проверьте ИНН: нажмите «Проверить» и исправьте ошибку');return}
+  if(!name||!contact||!/.+@.+\..+/.test(email)){toast('Заполните название, контактное лицо и email');return}
+  const e=S.egrul[inn]||{name,kpp:'—',ogrn:'—',addr:'—',head:'—',status:'Нет в справочнике'};
+  const id='R-'+(59+S.requests.length);S.requests.push({id,date:new Date().toISOString(),inn,...e,name,contact,phone,email,comment:$('#rgComment').value,state:'new'});
+  MANAGERS.forEach(m=>{if(S.notifyCh.tg)notify('Telegram',m.name,`Новая заявка на регистрацию: ${name}`)});if(S.notifyCh.email)notify('Email','Отдел продаж',`Новая заявка на регистрацию: ${name}`);
+  addLog('Регистрация',`Заявка ${id}: ${name}, ИНН ${inn}`,contact);S.reg=null;render();
+  modal('Заявка отправлена',`<div class="stack"><p>Спасибо! Заявка <b>${id}</b> от компании «${esc(name)}» передана менеджерам. После проверки вы получите письмо с логином и паролем на <b>${esc(email)}</b>.</p><div class="note">Чтобы посмотреть, как это выглядит у менеджера, переключитесь в режим «Сотрудник».</div><button class="btn primary" data-act="role" data-role="admin" style="align-self:flex-start">Открыть админ-панель</button></div>`)},
+ reqok:d=>{const r=S.requests.find(x=>x.id===d.id);const m=$('#rm-'+d.id).value;const id='C-'+(1046+S.clients.length-5);const login=r.email.split('@')[0].replace(/[^a-z0-9]/gi,'').toLowerCase().slice(0,12)||'client'+id.slice(2);
+  S.clients.push({id,login,name:r.name,inn:r.inn,kpp:r.kpp,city:(r.addr.match(/г\. ([^,]+)/)||[,'—'])[1],addr:r.addr,contact:r.contact,phone:r.phone,email:r.email,mgr:m,personal:null,limit:300000,deferral:14,debt:0,overdue:0,overdueDays:0,since:new Date().toISOString()});
+  S.lastLevels[id]=0;r.state='ok';r.login=login;addLog('Регистрация',`Заявка ${r.id} подтверждена. Клиент ${id}, ответственный ${mgr(m).name}`);notify('Email',r.email,'Доступ в оптовый кабинет: логин '+login);render();
+  modal('Клиент создан',`<div class="stack"><div class="note good">Клиент <b>${esc(r.name)}</b> получил ID <span class="mono">${id}</span>. Ответственный менеджер: ${mgr(m).name}.</div><h3>Письмо клиенту</h3><div class="doc" style="font-size:.9rem"><p><b>Кому:</b> ${esc(r.email)}<br><b>Тема:</b> Доступ в оптовый кабинет «Красивая Грядка»</p><br><p>Здравствуйте, ${esc(r.contact)}!</p><br><p>Ваша компания подключена к оптовому порталу.<br>Логин: <b>${login}</b><br>Временный пароль: <b>${Math.random().toString(36).slice(2,10)}</b><br>Личный кабинет: https://[домен-заказчика]/lk</p><br><p>Ваш менеджер: ${mgr(m).name}, ${mgr(m).phone}, ${mgr(m).email}</p></div><div class="small muted">В демо письмо не отправляется. В рабочей версии уходит через почтовый сервис сайта.</div></div>`)},
+ reqno:d=>{const r=S.requests.find(x=>x.id===d.id);r.state='no';addLog('Регистрация',`Заявка ${r.id} (${r.name}) отклонена`);render()},
+ cedit:d=>clientModal(d.id),
+ csave:d=>{const c=client(d.id);const pv=$('#cePers').value.trim();const old=JSON.stringify([c.personal,c.limit,c.deferral,c.mgr]);c.personal=pv===''?null:Math.max(0,+pv);c.limit=+$('#ceLimit').value||0;c.deferral=+$('#ceDef').value||0;c.mgr=$('#ceMgr').value;
+  addLog('Клиенты',`${c.name}: условия изменены (скидка ${c.personal==null?'накопительная':c.personal+'%'}, лимит ${rub(c.limit)}, отсрочка ${c.deferral} дн., менеджер ${mgr(c.mgr).name})`);closeModal();render();toast('Условия сохранены')},
+ ofilter:d=>{S.orderFilter=d.s;render()},
+ export:()=>writeXlsx([COLS,...S.products.map(p=>[p.art,p.name,p.cat,p.price,p.stock,p.unit,p.seasonal?'Да':'Нет'])],'price_export.xlsx',[14,48,24,10,10,12,10]),
+ tpl:()=>writeXlsx([COLS,['KG-CN-001','Туя западная «Смарагд»','Хвойные',1450,320,'шт','Нет'],['KG-BL-001','Тюльпан «Апельдорн», сетка 50 шт','Луковичные',1650,120,'уп','Да']],'shablon_praisa.xlsx',[14,48,24,10,10,18,12]),
+ apmore:()=>{S.aprodPage++;render()},
+ bulkprice:()=>{const k=1+(+$('#bulkPct').value||0)/100;const sel=Object.keys(S.prodSel).filter(a=>S.prodSel[a]);sel.forEach(a=>{const p=prod(a);p.price=Math.round(p.price*k)});addLog('Товары',`Массовое изменение цены на ${$('#bulkPct').value}% для ${sel.length} позиций`);S.prodSel={};render();toast(`Цены изменены у ${sel.length} позиций`)},
+ bulkst:()=>{const st=$('#bulkSt').value;const sel=Object.keys(S.prodSel).filter(a=>S.prodSel[a]);sel.forEach(a=>{const p=prod(a);p.status=st;if(st==='order')p.stock=0});addLog('Товары',`Статус «${st==='archive'?'Архив':st==='order'?'Под заказ':'Активен'}» для ${sel.length} позиций`);S.prodSel={};render()},
+ demofile:()=>{S.preview=analyze(demoRows(),'price_demo_1200.xlsx','Вручную');render();setTimeout(()=>document.querySelector('.sumrow')?.scrollIntoView({behavior:'smooth',block:'center'}),50)},
+ iapply:applyImport,icancel:()=>{S.preview=null;render()},
+ ierr:d=>{const h=S.imports[+d.i];modal('Ошибки загрузки · '+esc(h.file),`<div class="tbl-wrap"><table><thead><tr><th>Строка</th><th>Ошибка</th></tr></thead><tbody>${h.errors.map(e=>`<tr><td class="num">${e.row}</td><td>${esc(e.msg)}</td></tr>`).join('')}</tbody></table></div>`)},
+ autosave:()=>{S.auto={...S.auto,on:$('#autoOn').checked,src:$('#autoSrc').value,path:$('#autoPath').value,time:$('#autoTime').value};addLog('Прайс',`Автозагрузка: ${S.auto.on?'включена, '+S.auto.src+' '+S.auto.path+', ежедневно в '+S.auto.time:'выключена'}`);render();toast('Настройки автозагрузки сохранены')},
+ autorun:()=>{const keep=S.imp;S.imp={mode:'full',missing:'zero'};S.preview=analyze(demoRows(),'ftp_price_'+new Date().toISOString().slice(0,10)+'.xlsx','FTP (авто)');S.auto.last=new Date().toISOString();applyImport();S.imp=keep},
+ ladd:()=>{const L=S.rules.levels;const mx=Math.max(...L.map(l=>l.from),0);S.rules.levels.push({from:mx+1000000,pct:Math.max(...L.map(l=>l.pct),0)+2});render()},
+ ldel:d=>{S.rules.levels.splice(+d.i,1);if(!S.rules.levels.length)S.rules.levels.push({from:500000,pct:5});render()},
+ rcat:d=>{const R=S.rules;R.excludedCats=R.excludedCats.includes(d.cat)?R.excludedCats.filter(c=>c!==d.cat):[...R.excludedCats,d.cat];render()},
+ rsave:()=>{const R=S.rules;addLog('Скидки',`Правила сохранены: ${[...R.levels].sort((a,b)=>a.from-b.from).map(l=>l.pct+'% от '+fmt(l.from)+' ₽').join(', ')}; период ${R.period} мес.; сезонные ${R.excludeSeasonal?'не учитываются':'учитываются'}`);recalcAll('Пересчёт после изменения правил');render();toast('Правила сохранены, скидки пересчитаны')},
+ recalc:()=>{const ch=recalcAll('Ручной пересчёт');render();toast(ch.length?`Изменилось уровней: ${ch.length}`:'Изменений нет')},
+ repx:()=>{const rows=[['Клиент','Менеджер','Оборот 12 мес.','Скидка %','Долг','Просрочено']];S.clients.forEach(c=>{const d=disc(c.id);rows.push([c.name,mgr(c.mgr).name,Math.round(d.t),d.eff,c.debt,c.overdue])});writeXlsx(rows,'otchet_prodazhi.xlsx',[36,20,16,10,12,12])},
+ x1c:()=>{const q=S.orders.filter(o=>o.status==='Новый'||o.status==='Запрос счёта');q.forEach(o=>{o.status='Подтверждён'});const st=S.products.filter(p=>p.status!=='archive').length;S.exchange.last=new Date().toISOString();S.exchange.next=60;
+  addLog('1С',`Обмен с 1С: выгружено заказов ${q.length}, загружено остатков ${st}, цен ${st}, статусов ${q.length}`,'Система');render();toast(`Обмен завершён: ${q.length} заказов ушло в 1С`)},
+ crmsync:()=>{S.crm.last=new Date().toISOString();addLog('CRM',`Синхронизация с Битрикс24: клиентов ${S.clients.length}, менеджеров ${MANAGERS.length}, заказов за сутки ${S.orders.filter(o=>NOW-new Date(o.date)<DAY*1.5).length}`,'Система');render();toast('Синхронизация с CRM выполнена')},
+ logf:d=>{S.logF=d.t;render()}
+};
+function checkout(type){
+ const items=cartItems();if(!items.length)return;const c=client(S.me);const comment=$('#ocomment')?.value||'';const d=disc(S.me);
+ const id='З-'+(2400+S.orders.length);
+ const o={id,client:S.me,date:new Date().toISOString(),status:type==='invoice'?'Запрос счёта':'Новый',comment,type,paid:false,disc:d.eff,lines:items.map(({p,q})=>({art:p.art,name:p.name,cat:p.cat,seasonal:p.seasonal,unit:p.unit,qty:q,price:p.price}))};
+ S.orders.push(o);S.cart={};S.draftComment='';
+ const sum=orderSum(o);const over=sum>c.limit-c.debt-openAmount(S.me)+sum;
+ notifyMgr(c.mgr,`${type==='invoice'?'Запрос счёта':'Новый заказ'} ${id} от ${c.name} на ${rub(sum)}${over?' (превышен лимит, нужно согласование)':''}`);
+ addLog('Заказы',`${type==='invoice'?'Запрос счёта':'Новый заказ'} ${id} на ${rub(sum)}`);
+ render();
+ modal(type==='invoice'?'Запрос счёта отправлен':'Заказ оформлен',`<div class="stack"><p>${type==='invoice'?'Запрос счёта':'Заказ'} <b class="mono">${id}</b> на <b>${rub(sum)}</b> передан менеджеру ${mgr(c.mgr).name}. Он получил уведомление на почту и в Telegram.</p><p class="muted">Заказ уйдёт в 1С при ближайшем обмене. Статус можно отслеживать в разделе «Заказы и документы».</p><div class="row"><button class="btn primary" data-act="go" data-view="orders">К заказам</button><button class="btn" data-act="doc" data-id="${id}" data-doc="Счёт">Посмотреть счёт</button></div></div>`);
+}
+
+document.addEventListener('click',e=>{const el=e.target.closest('[data-act]');if(!el)return;const a=ACT[el.dataset.act];if(!a)return;if(el.tagName==='A')e.preventDefault();if(el.closest('#modal')&&el.dataset.act==='go')closeModal();a(el.dataset,el,e)});
+document.addEventListener('change',e=>{const el=e.target;const d=el.dataset||{};
+ switch(d.ch){
+  case 'cartq':{const q=Math.max(0,Math.floor(+el.value||0));if(q)S.cart[d.art]=q;else delete S.cart[d.art];S.draftComment=$('#ocomment')?.value;render();return}
+  case 'ostatus':{const o=S.orders.find(x=>x.id===d.id);const old=o.status;o.status=el.value;const c=client(o.client);addLog('Заказы',`Заказ ${o.id} (${c.name}): «${old}» → «${o.status}»`);
+    if(o.status==='Закрыт'&&S.rules.recalc!=='night'){const before=S.lastLevels[c.id];const ch=recalcAll(`Пересчёт при закрытии заказа ${o.id}`);const now=disc(c.id);if(before!==now.cur.pct)toast(`${c.name}: накопительная скидка ${before}% → ${now.cur.pct}%`);else toast(`Заказ ${o.id} закрыт, скидка клиента пересчитана: ${now.cur.pct}%`)}
+    else toast(`Статус заказа ${o.id}: ${o.status}. Изменение уйдёт в 1С`);render();return}
+  case 'psel':S.prodSel[d.art]=el.checked;render();return;
+  case 'pprice':{const p=prod(d.art);const v=Math.max(0,+el.value||0);addLog('Товары',`${p.art}: цена ${p.price} → ${v}`);p.price=v;save();toast(`Цена ${p.art} сохранена`);return}
+  case 'pstock':{const p=prod(d.art);const v=Math.max(0,Math.floor(+el.value||0));addLog('Товары',`${p.art}: остаток ${p.stock} → ${v}`);p.stock=v;if(p.status!=='archive')p.status=v>0?'active':'order';if(v>0&&v<10)notifyMgr('M-02',`Критический остаток: ${p.name} — ${v} ${p.unit}`);render();return}
+  case 'imode':S.imp.mode=el.value;S.preview=null;render();return;
+  case 'imiss':S.imp.missing=el.value;if(S.preview&&!S.preview.fatal)S.preview=S.preview;render();return;
+  case 'lfrom':S.rules.levels[+d.i].from=Math.max(0,+el.value||0);render();return;
+  case 'lpct':S.rules.levels[+d.i].pct=Math.max(0,+el.value||0);render();return;
+ }
+ if(el.id==='fAvail'){S.filters.avail=el.value;S.filters.page=1;render()}
+ if(el.id==='fBrand'){S.filters.brand=el.value;S.filters.page=1;render()}
+ if(el.id==='staffRole'){S.staffRole=el.value;render()}
+ if(el.id==='rPeriod'){S.rules.period=+el.value;render()}
+ if(el.id==='rRecalc'){S.rules.recalc=el.value;save()}
+ if(el.id==='rSeas'){S.rules.excludeSeasonal=el.checked;render()}
+});
+document.addEventListener('input',e=>{if(e.target.id==='ocomment')S.draftComment=e.target.value});
+let qT;$('#q').addEventListener('input',e=>{clearTimeout(qT);qT=setTimeout(()=>{S.filters.q=e.target.value;S.filters.page=1;if(S.view!=='catalog')S.view='catalog';render();},220)});
+$('#q').value=S.filters.q||'';
+render();
+</script>
+
+</body></html>
