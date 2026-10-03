@@ -1,9 +1,18 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+/* подвал с подписью разработчика: «Создан в «Веб-Ателье»» – одинаковая на всех сайтах */
+.kg-foot{max-width:1320px;margin:0 auto;padding:18px 16px 28px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 24px;font-size:.8rem;color:var(--muted)}
+.kg-foot__demo{flex-basis:100%}
+.foot__made{display:inline-block;white-space:nowrap;font-style:italic;font-size:.95rem;line-height:1.4;color:var(--muted);padding:.4em 0}
+.foot__made a{display:inline;margin:0 0 0 .3em;color:inherit;text-decoration:none;font-family:Calibri,"Carlito",sans-serif;font-weight:700;font-style:italic;font-size:1.12em}
+.foot__made a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:.18em}
+.foot__made img{display:inline-block;width:40px;height:52px;max-width:none;margin-left:.35em;vertical-align:-7px}
+</style></head><body>
 <title>Красивая Грядка Опт</title>
 <meta name="description" content="Демо B2B-портала оптовых продаж: каталог, личный кабинет, накопительные скидки, импорт прайса, админка.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@1,700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
 :root{
@@ -283,6 +292,11 @@ dl.spec dd{margin:0;font-weight:500}
   <aside class="side" id="side"></aside>
   <main id="main"></main>
 </div>
+<footer class="kg-foot">
+  <span>Оптовый портал «Красивая Грядка»</span>
+  <span class="foot__made">Создан в <a href="http://web-atelie.ru/" target="_blank" rel="noopener">«Веб-Ателье»</a><picture><source srcset="assets/web-atelie-light.png" media="(prefers-color-scheme: dark)"><img src="assets/web-atelie.png" alt="" width="40" height="52" loading="lazy" decoding="async"></picture></span>
+  <span class="kg-foot__demo">Демо-концепт оптового B2B-портала. Название, компании, ИНН, цены и заказы условные, обмен с 1С и проверка ИНН имитируются.</span>
+</footer>
 <div class="modal" id="modal" hidden><div class="modal-box" role="dialog" aria-modal="true" id="modalBox"></div></div>
 <div class="tip" id="tip" hidden></div>
 <div class="toast" id="toast" hidden></div>
